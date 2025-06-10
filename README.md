@@ -139,7 +139,7 @@ cd heath_care
 Kiểm tra và điều chỉnh các biến môi trường trong `docker-compose.yml`:
 ```yaml
 environment:
-  - DB_PASSWORD=NguyenDuc@163
+  - DB_PASSWORD=
   - JWT_SECRET_KEY=your-jwt-secret-key-here
   - SECRET_KEY=django-insecure-gateway-key
 ```
