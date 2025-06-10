@@ -1,0 +1,208 @@
+{
+    "knowledge_base_name": "Thông tin về bệnh cúm",
+    "description": "Cơ sở kiến thức này chứa thông tin tổng quan về bệnh cúm, bao gồm định nghĩa, nguyên nhân, triệu chứng, đường lây truyền, đối tượng nguy cơ, biến chứng, chẩn đoán, điều trị và phòng ngừa.",
+    "topics": [
+      {
+        "name": "Tổng quan về bệnh cúm",
+        "information": {
+          "definition": "Cúm (Flu) là một bệnh nhiễm virus cấp tính đường hô hấp, do virus cúm (Influenza virus) gây ra. Bệnh tấn công vào hệ hô hấp bao gồm mũi, cổ họng, các ống phế quản và có thể cả phổi.",
+          "icd_10_code": "J10-J11",
+          "classification": "Bệnh cúm thuộc nhóm B trong Luật Phòng, chống bệnh truyền nhiễm Việt Nam."
+        }
+      },
+      {
+        "name": "Nguyên nhân gây bệnh cúm",
+        "information": {
+          "agent": "Virus cúm (Influenza virus)",
+          "family": "Orthomyxoviridae",
+          "types": [
+            {
+              "name": "Cúm A",
+              "description": "Có khả năng gây bệnh cho cả người và nhiều loài động vật (như chim, lợn). Virus cúm A có nhiều phân nhóm (subtype) dựa trên các kháng nguyên bề mặt hemagglutinin (H) và neuraminidase (N). Đây là týp virus cúm thường gây ra các vụ dịch lớn và đại dịch do khả năng biến đổi kháng nguyên liên tục.",
+              "common_subtypes_in_humans": ["H1N1", "H3N2"]
+            },
+            {
+              "name": "Cúm B",
+              "description": "Chủ yếu gây bệnh ở người và thường gây ra các dịch bệnh cúm mùa với quy mô nhỏ hơn cúm A. Virus cúm B cũng có khả năng biến đổi nhưng chậm hơn cúm A. Cúm B được chia thành hai dòng chính là B/Yamagata và B/Victoria.",
+              "lineages": ["B/Yamagata", "B/Victoria"]
+            },
+            {
+              "name": "Cúm C",
+              "description": "Thường gây bệnh nhẹ ở đường hô hấp trên và không gây thành dịch lớn. Các triệu chứng của cúm C thường ít nghiêm trọng hơn so với cúm A và B."
+            }
+          ],
+          "viral_characteristics": "Virus cúm liên tục biến thể, với các chủng mới xuất hiện thường xuyên."
+        }
+      },
+      {
+        "name": "Đường lây truyền",
+        "information": {
+          "primary_mode": "Lây lan qua đường hô hấp.",
+          "mechanisms": [
+            "Qua các giọt nhỏ nước bọt hay dịch tiết mũi họng của người bệnh chứa virus cúm khi họ ho, hắt hơi, hoặc nói chuyện.",
+            "Tiếp xúc trực tiếp với các bề mặt bị nhiễm virus rồi chạm tay vào mắt, mũi, miệng."
+          ],
+          "infectivity": "Bệnh cúm có khả năng lây nhiễm rất cao và lây truyền nhanh, có thể gây dịch và đại dịch.",
+          "entry_point": "Virus vào cơ thể qua đường mũi, họng."
+        }
+      },
+      {
+        "name": "Triệu chứng bệnh cúm",
+        "information": {
+          "onset": "Triệu chứng thường xuất hiện đột ngột, sau khoảng 1-4 ngày (trung bình 2 ngày) kể từ khi cơ thể tiếp xúc với virus gây bệnh.",
+          "common_symptoms": [
+            "Sốt cao (thường từ 38°C - 41°C)",
+            "Ớn lạnh, rét run",
+            "Đau đầu",
+            "Đau mỏi cơ bắp toàn thân",
+            "Mệt mỏi, cảm giác yếu ớt, kiệt sức",
+            "Ho (thường là ho khan)",
+            "Viêm họng, đau họng",
+            "Sổ mũi, nghẹt mũi",
+            "Chóng mặt"
+          ],
+          "less_common_symptoms": [
+            "Buồn nôn, nôn mửa (thường gặp ở trẻ em hơn người lớn)",
+            "Tiêu chảy (thường gặp ở trẻ em hơn người lớn)"
+          ],
+          "duration": "Hầu hết các triệu chứng thuyên giảm và người bệnh có thể tự hồi phục trong khoảng 2-7 ngày, tuy nhiên ho và mệt mỏi có thể kéo dài hơn (vài tuần).",
+          "distinction_from_common_cold": "Cúm thường có triệu chứng nặng hơn và khởi phát đột ngột hơn so với cảm lạnh thông thường. Sốt cao, đau cơ, mệt mỏi rõ rệt là những dấu hiệu thường gặp ở cúm hơn là cảm lạnh."
+        }
+      },
+      {
+        "name": "Đối tượng nguy cơ cao và biến chứng",
+        "information": {
+          "high_risk_groups": [
+            "Trẻ em, đặc biệt là trẻ dưới 5 tuổi (nguy cơ cao nhất ở trẻ dưới 2 tuổi)",
+            "Người lớn tuổi (trên 65 tuổi)",
+            "Phụ nữ mang thai (đặc biệt trong 3 tháng đầu và 3 tháng cuối thai kỳ) và phụ nữ sau sinh (trong vòng 2 tuần)",
+            "Người có hệ miễn dịch suy yếu (do HIV/AIDS, hóa trị, sử dụng corticosteroid kéo dài)",
+            "Người mắc các bệnh mãn tính như: hen suyễn, bệnh phổi tắc nghẽn mãn tính (COPD), bệnh tim mạch (suy tim), bệnh thận, bệnh gan, tiểu đường, rối loạn chuyển hóa.",
+            "Người sống trong các cơ sở tập thể như viện dưỡng lão, doanh trại.",
+            "Người béo phì (chỉ số khối cơ thể - BMI từ 40 trở lên)."
+          ],
+          "potential_complications": [
+            "Viêm phổi (do virus cúm hoặc bội nhiễm vi khuẩn)",
+            "Suy hô hấp",
+            "Viêm tai giữa",
+            "Viêm xoang",
+            "Viêm phế quản",
+            "Làm trầm trọng thêm các bệnh mãn tính sẵn có (như hen suyễn, bệnh tim)",
+            "Viêm cơ tim, viêm não, viêm cơ (hiếm gặp)",
+            "Hội chứng Reye (hiếm gặp nhưng rất nguy hiểm, thường ở trẻ em từ 2-16 tuổi, liên quan đến việc sử dụng aspirin khi bị cúm, gây sưng phù ở gan và não)",
+            "Nhiễm trùng huyết (Sepsis)",
+            "Ở phụ nữ mang thai: có thể gây biến chứng cho thai nhi (sinh non, nhẹ cân) hoặc các biến chứng nguy hiểm cho mẹ."
+          ],
+          "warning_signs_for_severe_illness": [
+            "Khó thở hoặc thở nhanh",
+            "Đau hoặc tức ngực",
+            "Chóng mặt đột ngột, lú lẫn",
+            "Nôn mửa nghiêm trọng hoặc dai dẳng",
+            "Sốt cao kéo dài hoặc sốt tái phát sau khi đã hạ",
+            "Ở trẻ em: da xanh tím, không chịu uống nước, không tương tác hoặc rất khó đánh thức, sốt kèm phát ban."
+          ]
+        }
+      },
+      {
+        "name": "Chẩn đoán bệnh cúm",
+        "information": {
+          "clinical_diagnosis": "Dựa trên các triệu chứng lâm sàng đặc trưng, đặc biệt trong mùa cúm.",
+          "laboratory_tests": [
+            {
+              "name": "Xét nghiệm nhanh phát hiện kháng nguyên cúm (Rapid Influenza Diagnostic Tests - RIDTs)",
+              "description": "Cho kết quả nhanh (trong vòng 15-30 phút), phát hiện kháng nguyên virus cúm trong dịch tiết đường hô hấp (dịch mũi, họng). Độ nhạy có thể thay đổi."
+            },
+            {
+              "name": "Xét nghiệm khuếch đại axit nucleic (NAATs) như RT-PCR (Reverse Transcription Polymerase Chain Reaction)",
+              "description": "Là xét nghiệm có độ nhạy và độ đặc hiệu cao nhất để phát hiện RNA của virus cúm. Được coi là tiêu chuẩn vàng."
+            },
+            {
+              "name": "Miễn dịch huỳnh quang (Direct or Indirect Fluorescent Antibody - DFA/IFA)",
+              "description": "Phát hiện kháng nguyên virus trong tế bào từ dịch tiết đường hô hấp."
+            },
+            {
+              "name": "Phân lập virus (Viral culture)",
+              "description": "Nuôi cấy virus từ mẫu bệnh phẩm. Mất nhiều thời gian hơn nhưng hữu ích cho việc nghiên cứu và theo dõi chủng virus."
+            },
+            {
+              "name": "Xét nghiệm huyết thanh học",
+              "description": "Phát hiện sự gia tăng kháng thể cúm trong máu giữa giai đoạn cấp tính và giai đoạn hồi phục. Thường dùng cho mục đích nghiên cứu dịch tễ học hơn là chẩn đoán ca bệnh cấp."
+            }
+          ],
+          "other_tests": [
+            {
+              "name": "Chụp X-quang phổi",
+              "description": "Có thể được chỉ định để đánh giá mức độ tổn thương phổi hoặc phát hiện biến chứng viêm phổi."
+            }
+          ]
+        }
+      },
+      {
+        "name": "Điều trị bệnh cúm",
+        "information": {
+          "general_approach": "Mục tiêu chính là giảm nhẹ triệu chứng, ngăn ngừa biến chứng và giúp người bệnh hồi phục.",
+          "home_care_for_mild_cases": [
+            "Nghỉ ngơi nhiều, đặc biệt khi còn sốt.",
+            "Uống nhiều nước và chất lỏng (nước lọc, nước trái cây, súp) để tránh mất nước.",
+            "Ăn thức ăn mềm, dễ tiêu, giàu dinh dưỡng.",
+            "Sử dụng nước muối sinh lý để súc họng, rửa mũi giúp giảm triệu chứng và sát khuẩn.",
+            "Theo dõi triệu chứng và đến cơ sở y tế nếu có dấu hiệu nặng lên."
+          ],
+          "medications": [
+            {
+              "category": "Thuốc giảm triệu chứng (không kê đơn)",
+              "types": [
+                "Thuốc hạ sốt và giảm đau (ví dụ: Paracetamol, Ibuprofen). Lưu ý: Tránh dùng Aspirin cho trẻ em và thanh thiếu niên bị cúm do nguy cơ hội chứng Reye.",
+                "Thuốc giảm ho (tùy loại ho và theo hướng dẫn).",
+                "Thuốc thông mũi (sử dụng ngắn ngày)."
+              ]
+            },
+            {
+              "category": "Thuốc kháng virus (cần kê đơn của bác sĩ)",
+              "description": "Có thể làm giảm thời gian bị bệnh và ngăn ngừa các biến chứng nghiêm trọng. Hiệu quả nhất khi được sử dụng sớm (trong vòng 48 giờ kể từ khi bắt đầu có triệu chứng). Thường được chỉ định cho người có nguy cơ cao bị biến chứng hoặc người bệnh nặng.",
+              "examples": ["Oseltamivir (Tamiflu)", "Zanamivir (Relenza)", "Peramivir (Rapivab)", "Baloxavir (Xofluza)"]
+            }
+          ],
+          "hospitalization": "Các trường hợp nặng, có biến chứng hoặc thuộc nhóm nguy cơ cao có thể cần nhập viện để được theo dõi và điều trị tích cực, bao gồm cả việc điều trị các nhiễm khuẩn thứ phát nếu có."
+        }
+      },
+      {
+        "name": "Phòng ngừa bệnh cúm",
+        "information": {
+          "primary_prevention_method": "Tiêm phòng vắc xin cúm hàng năm.",
+          "vaccination": {
+            "recommendation": "Trung tâm Kiểm soát và Phòng ngừa Dịch bệnh (CDC) Hoa Kỳ và Tổ chức Y tế Thế giới (WHO) khuyến cáo tiêm phòng cúm hàng năm cho tất cả mọi người từ 6 tháng tuổi trở lên (trừ một số trường hợp chống chỉ định đặc biệt).",
+            "timing": "Nên tiêm phòng trước khi mùa cúm bắt đầu (thường là vào mùa thu - đông). Cần khoảng 2 tuần sau khi tiêm để cơ thể phát triển đủ kháng thể bảo vệ.",
+            "effectiveness": "Vắc xin cúm giúp giảm nguy cơ mắc bệnh, giảm mức độ nặng của bệnh nếu vẫn mắc, và giảm nguy cơ biến chứng nghiêm trọng. Hiệu quả của vắc xin có thể thay đổi tùy theo mùa và sự tương đồng giữa chủng virus trong vắc xin và chủng virus đang lưu hành.",
+            "annual_vaccination_reason": "Virus cúm liên tục thay đổi (biến đổi kháng nguyên), vì vậy vắc xin được cập nhật hàng năm để phù hợp với các chủng virus dự kiến sẽ lưu hành."
+          },
+          "hygiene_and_behavioral_measures": [
+            "Rửa tay thường xuyên bằng xà phòng và nước sạch trong ít nhất 20 giây, hoặc sử dụng dung dịch rửa tay khô chứa cồn.",
+            "Che miệng và mũi bằng khăn giấy hoặc khuỷu tay khi ho hoặc hắt hơi, sau đó vứt khăn giấy vào thùng rác và rửa tay.",
+            "Tránh chạm tay vào mắt, mũi, miệng.",
+            "Vệ sinh và khử trùng thường xuyên các bề mặt và đồ vật có thể bị nhiễm virus (tay nắm cửa, điện thoại, bàn phím).",
+            "Tránh tiếp xúc gần với người bị bệnh cúm.",
+            "Nếu bị cúm, nên ở nhà, hạn chế tiếp xúc với người khác để tránh lây lan bệnh (ít nhất 24 giờ sau khi hết sốt mà không dùng thuốc hạ sốt).",
+            "Tránh đến nơi đông người trong mùa cúm nếu không cần thiết.",
+            "Duy trì lối sống lành mạnh: ăn uống đủ chất, ngủ đủ giấc, tập thể dục đều đặn để tăng cường hệ miễn dịch."
+          ],
+          "public_health_measures": [
+            "Giáo dục cộng đồng về bệnh cúm và các biện pháp phòng ngừa.",
+            "Theo dõi và giám sát dịch tễ học bệnh cúm để phát hiện sớm các đợt bùng phát."
+          ]
+        }
+      },
+      {
+        "name": "Khi nào cần gặp bác sĩ",
+        "information": {
+          "seek_medical_attention_if": [
+            "Có các triệu chứng cúm và thuộc nhóm nguy cơ cao bị biến chứng.",
+            "Các triệu chứng trở nên nghiêm trọng hoặc không cải thiện sau vài ngày (ví dụ: khó thở, đau ngực, sốt cao kéo dài, mất nước, lú lẫn).",
+            "Có dấu hiệu của các biến chứng như viêm phổi.",
+            "Trẻ em có các dấu hiệu cảnh báo nguy hiểm (đã liệt kê ở phần biến chứng).",
+            "Cần tư vấn về việc sử dụng thuốc kháng virus."
+          ]
+        }
+      }
+    ]
+  }

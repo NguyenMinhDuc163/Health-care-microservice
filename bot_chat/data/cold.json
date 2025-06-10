@@ -1,0 +1,543 @@
+{
+  "disease_name": "Cảm lạnh",
+  "disease_code": "J00",
+  "last_updated": "2025-05-26",
+  "categories": {
+    "overview": {
+      "definition": "Cảm lạnh là một bệnh lý phổ biến về đường hô hấp trên, do virus gây ra, thường tác động lên mũi, họng và xoang. Đây là bệnh lành tính, có thể tự khỏi sau 7-10 ngày.",
+      "alternative_names": ["Cảm lạnh thông thường", "Viêm mũi họng cấp do virus", "Common cold"],
+      "icd_10": "J00 - Viêm mũi họng cấp",
+      "prevalence": {
+        "general": "Trung bình mỗi người trưởng thành mắc 2-3 lần/năm",
+        "children": "Trẻ dưới 6 tuổi có thể mắc 6-8 lần/năm",
+        "peak_season": "Mùa thu và mùa đông (tháng 9 - tháng 4)",
+        "most_affected": "Trẻ em và người cao tuổi"
+      }
+    },
+    "causes": {
+      "primary_causes": [
+        {
+          "type": "virus",
+          "name": "Rhinovirus",
+          "percentage": "50-60%",
+          "description": "Nguyên nhân phổ biến nhất, có hơn 100 chủng khác nhau"
+        },
+        {
+          "type": "virus",
+          "name": "Enterovirus",
+          "percentage": "10-15%",
+          "description": "Bao gồm Echovirus và Coxsackievirus"
+        },
+        {
+          "type": "virus",
+          "name": "Coronavirus",
+          "percentage": "10-15%",
+          "description": "Các chủng coronavirus gây cảm lạnh thông thường"
+        },
+        {
+          "type": "virus",
+          "name": "Virus khác",
+          "percentage": "15-25%",
+          "description": "RSV, Parainfluenza, Adenovirus"
+        }
+      ],
+      "transmission": {
+        "routes": [
+          "Đường hô hấp qua giọt bắn khi ho, hắt hơi, nói chuyện",
+          "Tiếp xúc trực tiếp với người bệnh",
+          "Tiếp xúc với bề mặt có virus sau đó chạm vào mắt, mũi, miệng",
+          "Dùng chung đồ vật với người bệnh"
+        ],
+        "incubation_period": "12 giờ - 3 ngày",
+        "contagious_period": "3 ngày đầu sau khi xuất hiện triệu chứng",
+        "virus_survival": "Virus có thể sống trên bề mặt vài giờ đến vài ngày"
+      },
+      "risk_factors": [
+        "Tuổi tác (trẻ dưới 6 tuổi và người cao tuổi)",
+        "Hệ miễn dịch suy yếu",
+        "Mùa lạnh (thu, đông)",
+        "Hút thuốc hoặc tiếp xúc khói thuốc",
+        "Căng thẳng, thiếu ngủ",
+        "Thời tiết thay đổi đột ngột",
+        "Tiếp xúc với đám đông",
+        "Môi trường không khí khô"
+      ]
+    },
+    "symptoms": {
+      "stages": [
+        {
+          "stage": "Giai đoạn 1 (Ngày 1-3)",
+          "description": "Khởi phát bệnh",
+          "symptoms": [
+            "Cổ họng ngứa, khó chịu",
+            "Hắt hơi",
+            "Chảy nước mũi trong",
+            "Ho khan nhẹ",
+            "Khản giọng",
+            "Cảm giác mệt mỏi nhẹ"
+          ]
+        },
+        {
+          "stage": "Giai đoạn 2 (Ngày 4-7)",
+          "description": "Đỉnh điểm bệnh",
+          "symptoms": [
+            "Nghẹt mũi nặng",
+            "Nước mũi đặc, có màu vàng hoặc xanh",
+            "Đau đầu",
+            "Đau nhức cơ thể",
+            "Sốt nhẹ (phổ biến ở trẻ em)",
+            "Chảy nước mắt",
+            "Cảm giác áp lực ở tai và mặt",
+            "Ho nhiều hơn",
+            "Mất vị giác"
+          ]
+        },
+        {
+          "stage": "Giai đoạn 3 (Ngày 8-10)",
+          "description": "Hồi phục",
+          "symptoms": [
+            "Các triệu chứng giảm dần",
+            "Ho có thể kéo dài",
+            "Nghẹt mũi giảm",
+            "Phục hồi năng lượng"
+          ]
+        }
+      ],
+      "common_symptoms": [
+        {
+          "symptom": "Chảy nước mũi/nghẹt mũi",
+          "frequency": "Rất phổ biến",
+          "description": "Ban đầu nước mũi trong, sau đó đặc và có màu"
+        },
+        {
+          "symptom": "Hắt hơi",
+          "frequency": "Rất phổ biến",
+          "description": "Thường xuất hiện sớm"
+        },
+        {
+          "symptom": "Ho",
+          "frequency": "Phổ biến",
+          "description": "Thường ho khan, có thể kéo dài 2-8 tuần"
+        },
+        {
+          "symptom": "Đau họng",
+          "frequency": "Phổ biến",
+          "description": "Cảm giác ngứa, khô họng"
+        },
+        {
+          "symptom": "Đau đầu",
+          "frequency": "Phổ biến",
+          "description": "Đau đầu nhẹ đến vừa"
+        },
+        {
+          "symptom": "Sốt",
+          "frequency": "Thỉnh thoảng",
+          "description": "Sốt nhẹ, phổ biến hơn ở trẻ em"
+        },
+        {
+          "symptom": "Mệt mỏi",
+          "frequency": "Phổ biến",
+          "description": "Cảm giác uể oải, thiếu năng lượng"
+        }
+      ],
+      "symptoms_in_children": [
+        "Sốt cao hơn người lớn (có thể đến 39°C)",
+        "Biếng ăn",
+        "Quấy khóc",
+        "Khó ngủ",
+        "Thở bằng miệng do nghẹt mũi",
+        "Tiết nhiều nước dãi",
+        "Có thể buồn nôn"
+      ]
+    },
+    "diagnosis": {
+      "clinical_diagnosis": {
+        "primary_method": "Chẩn đoán lâm sàng dựa trên triệu chứng",
+        "history": "Tiền sử tiếp xúc, thời gian xuất hiện triệu chứng",
+        "physical_exam": "Khám tai mũi họng, nghe phổi, đo nhiệt độ"
+      },
+      "laboratory_tests": {
+        "routine": "Thường không cần thiết",
+        "when_needed": [
+          "Nghi ngờ biến chứng",
+          "Triệu chứng kéo dài >10 ngày",
+          "Sốt cao kéo dài",
+          "Khó thở"
+        ],
+        "tests": [
+          "Xét nghiệm máu (CBC)",
+          "Cấy khuẩn họng",
+          "X-quang ngực (nếu nghi ngờ viêm phổi)"
+        ]
+      },
+      "differential_diagnosis": [
+        "Cúm (Influenza)",
+        "Viêm họng do vi khuẩn",
+        "Viêm xoang",
+        "Dị ứng",
+        "COVID-19"
+      ]
+    },
+    "treatment": {
+      "general_principles": [
+        "Không có thuốc đặc trị",
+        "Điều trị triệu chứng",
+        "Hỗ trợ cơ thể tự khỏi bệnh",
+        "Ngăn ngừa biến chứng"
+      ],
+      "medications": {
+        "pain_fever_relief": [
+          {
+            "drug": "Paracetamol (Acetaminophen)",
+            "dose_adult": "500-1000mg mỗi 6-8 giờ",
+            "dose_child": "10-15mg/kg mỗi 6-8 giờ",
+            "max_daily": "4g/ngày cho người lớn"
+          },
+          {
+            "drug": "Ibuprofen",
+            "dose_adult": "400-600mg mỗi 6-8 giờ",
+            "dose_child": "5-10mg/kg mỗi 6-8 giờ (>6 tháng tuổi)",
+            "contraindication": "Trẻ <6 tháng, suy thận"
+          }
+        ],
+        "nasal_decongestants": [
+          {
+            "type": "Xịt mũi",
+            "examples": ["Oxymetazoline", "Xylometazoline"],
+            "duration": "Tối đa 5 ngày",
+            "age_limit": "Không dùng cho trẻ <6 tuổi"
+          }
+        ],
+        "cough_medicine": [
+          {
+            "type": "Thuốc long đờm",
+            "examples": ["Guaifenesin", "N-acetylcysteine"],
+            "indication": "Ho có đờm"
+          },
+          {
+            "type": "Thuốc giảm ho",
+            "examples": ["Dextromethorphan"],
+            "indication": "Ho khan quá nhiều"
+          }
+        ],
+        "contraindicated": [
+          "Kháng sinh (trừ khi có biến chứng vi khuẩn)",
+          "Aspirin cho trẻ <18 tuổi (nguy cơ hội chứng Reye)"
+        ]
+      },
+      "home_remedies": [
+        {
+          "method": "Nghỉ ngơi",
+          "description": "Ngủ đủ giấc, hạn chế hoạt động"
+        },
+        {
+          "method": "Uống nhiều nước",
+          "examples": ["Nước ấm", "Trà gừng", "Nước chanh mật ong"],
+          "amount": "2-3 lít/ngày cho người lớn"
+        },
+        {
+          "method": "Súc họng nước muối",
+          "recipe": "1/4 - 1/2 thìa muối trong 1 cốc nước ấm",
+          "frequency": "2-4 lần/ngày"
+        },
+        {
+          "method": "Hít hơi nước nóng",
+          "description": "Có thể thêm tinh dầu bạc hà hoặc sả"
+        },
+        {
+          "method": "Giữ ẩm không khí",
+          "tools": ["Máy tạo ẩm", "Đặt chậu nước trong phòng"]
+        },
+        {
+          "method": "Nâng cao đầu khi ngủ",
+          "description": "Giúp giảm nghẹt mũi"
+        }
+      ],
+      "special_care_children": [
+        "Cho trẻ nghỉ ngơi tại nhà",
+        "Bổ sung nhiều nước (sữa mẹ cho trẻ nhỏ)",
+        "Hút mũi bằng bóng cao su",
+        "Nhỏ nước muối sinh lý vào mũi",
+        "Mật ong cho trẻ >12 tháng tuổi (giảm ho)",
+        "Tránh cho trẻ uống thuốc ho không kê đơn <6 tuổi"
+      ]
+    },
+    "complications": {
+      "common_complications": [
+        {
+          "complication": "Viêm tai giữa",
+          "frequency": "5-10% trường hợp",
+          "symptoms": ["Đau tai", "Nghe kém", "Sốt trở lại"],
+          "treatment": "Có thể cần kháng sinh"
+        },
+        {
+          "complication": "Viêm xoang cấp",
+          "frequency": "2-5% trường hợp",
+          "symptoms": ["Đau mặt", "Nghẹt mũi kéo dài", "Dịch mũi mủ"],
+          "treatment": "Kháng sinh nếu do vi khuẩn"
+        },
+        {
+          "complication": "Viêm phế quản",
+          "frequency": "1-3% trường hợp",
+          "symptoms": ["Ho kéo dài", "Khó thở nhẹ", "Đờm nhiều"],
+          "treatment": "Hỗ trợ, theo dõi"
+        },
+        {
+          "complication": "Viêm phổi",
+          "frequency": "<1% trường hợp",
+          "symptoms": ["Khó thở", "Sốt cao", "Đau ngực"],
+          "treatment": "Cần nhập viện, kháng sinh"
+        },
+        {
+          "complication": "Kích hoạt hen suyễn",
+          "risk_group": "Người có tiền sử hen",
+          "symptoms": ["Khó thở", "Thở khò khè", "Ho nhiều"],
+          "treatment": "Thuốc giãn phế quản"
+        }
+      ],
+      "high_risk_groups": [
+        "Trẻ sơ sinh và trẻ nhỏ <2 tuổi",
+        "Người có bệnh mãn tính (hen suyễn, COPD, tim mạch)",
+        "Người suy giảm miễn dịch",
+        "Phụ nữ có thai",
+        "Người cao tuổi >65 tuổi"
+      ]
+    },
+    "when_to_see_doctor": {
+      "adults": [
+        "Sốt >38.5°C kéo dài >5 ngày",
+        "Sốt trở lại sau khi đã hết sốt",
+        "Khó thở hoặc thở khò khè",
+        "Đau họng và đau đầu nghiêm trọng",
+        "Đau xoang nghiêm trọng",
+        "Triệu chứng không cải thiện sau 10 ngày",
+        "Ho ra máu",
+        "Đau tai nghiêm trọng"
+      ],
+      "children": [
+        "Trẻ <3 tháng bị sốt >38°C",
+        "Sốt kéo dài >2 ngày ở mọi lứa tuổi",
+        "Triệu chứng xấu đi hoặc không cải thiện",
+        "Khó thở, thở khò khè",
+        "Đau tai",
+        "Buồn ngủ bất thường",
+        "Chán ăn hoàn toàn",
+        "Quấy khóc không ngừng",
+        "Ho kéo dài >3 tuần"
+      ],
+      "emergency_signs": [
+        "Khó thở nghiêm trọng",
+        "Đau ngực",
+        "Sốt cao không hạ được",
+        "Mê sảng, lơ mơ",
+        "Môi xanh tím",
+        "Mất nước nghiêm trọng"
+      ]
+    },
+    "prevention": {
+      "personal_hygiene": [
+        "Rửa tay thường xuyên bằng xà phòng ít nhất 20 giây",
+        "Sử dụng dung dịch rửa tay có cồn khi không có nước",
+        "Tránh chạm tay vào mắt, mũi, miệng",
+        "Che miệng khi ho, hắt hơi bằng khăn giấy hoặc khủy tay",
+        "Súc họng nước muối hàng ngày"
+      ],
+      "environmental_measures": [
+        "Khử trùng bề mặt thường xuyên",
+        "Giữ không gian sống sạch sẽ, thoáng khí",
+        "Duy trì độ ẩm phòng 40-60%",
+        "Tránh khói thuốc",
+        "Vệ sinh đồ chơi trẻ em thường xuyên"
+      ],
+      "lifestyle": [
+        "Ăn uống đầy đủ dinh dưỡng",
+        "Tập thể dục thường xuyên",
+        "Ngủ đủ 7-9 giờ/đêm",
+        "Giảm stress",
+        "Uống đủ nước",
+        "Bổ sung vitamin C và D",
+        "Giữ ấm cơ thể"
+      ],
+      "social_measures": [
+        "Tránh tiếp xúc gần với người bệnh",
+        "Đeo khẩu trang ở nơi đông người",
+        "Không dùng chung đồ ăn, đồ uống",
+        "Ở nhà khi bị bệnh",
+        "Cách ly trẻ bệnh với trẻ khỏe mạnh"
+      ],
+      "vaccination": [
+        "Tiêm vắc xin cúm hàng năm (phòng ngừa cúm, không phải cảm lạnh)",
+        "Tiêm đủ các vắc xin theo lịch (tăng cường miễn dịch tổng thể)"
+      ]
+    },
+    "myths_facts": [
+      {
+        "myth": "Thời tiết lạnh gây cảm lạnh",
+        "fact": "Virus gây cảm lạnh, không phải thời tiết. Thời tiết lạnh chỉ tạo điều kiện thuận lợi cho virus lây lan."
+      },
+      {
+        "myth": "Vitamin C có thể chữa khỏi cảm lạnh",
+        "fact": "Vitamin C có thể giúp phòng ngừa và giảm thời gian bệnh nhưng không thể chữa khỏi hoàn toàn."
+      },
+      {
+        "myth": "Kháng sinh có thể điều trị cảm lạnh",
+        "fact": "Kháng sinh chỉ hiệu quả với vi khuẩn, không có tác dụng với virus gây cảm lạnh."
+      },
+      {
+        "myth": "Đi ra ngoài với tóc ướt gây cảm lạnh",
+        "fact": "Không có bằng chứng khoa học nào chứng minh điều này. Virus mới là nguyên nhân gây bệnh."
+      }
+    ],
+    "nutrition_recommendations": {
+      "foods_to_eat": [
+        {
+          "food": "Súp gà",
+          "benefit": "Cung cấp nước, điện giải và có tính chất chống viêm nhẹ"
+        },
+        {
+          "food": "Trái cây giàu vitamin C",
+          "examples": ["Cam", "Chanh", "Kiwi", "Ổi"],
+          "benefit": "Tăng cường miễn dịch"
+        },
+        {
+          "food": "Tỏi",
+          "benefit": "Có tính chất kháng virus và kháng khuẩn"
+        },
+        {
+          "food": "Gừng",
+          "benefit": "Chống viêm, giảm buồn nôn, làm ấm cơ thể"
+        },
+        {
+          "food": "Mật ong",
+          "benefit": "Giảm ho, kháng khuẩn (chỉ dùng cho trẻ >12 tháng)"
+        },
+        {
+          "food": "Sữa chua có probiotic",
+          "benefit": "Tăng cường miễn dịch đường ruột"
+        }
+      ],
+      "foods_to_avoid": [
+        "Rượu bia (ức chế miễn dịch)",
+        "Thực phẩm chế biến sẵn (ít dinh dưỡng)",
+        "Đồ ăn cay nóng (có thể kích ứng họng)",
+        "Sữa và phô mai (có thể tăng đờm ở một số người)",
+        "Đồ uống có caffeine quá nhiều",
+        "Thực phẩm giàu đường"
+      ],
+      "hydration": [
+        "Nước lọc ấm",
+        "Trà thảo mộc",
+        "Nước chanh mật ong",
+        "Nước dừa",
+        "Nước ép trái cây tươi (pha loãng)"
+      ]
+    },
+    "special_populations": {
+      "pregnancy": {
+        "safety": "Cảm lạnh thường không ảnh hưởng đến thai nhi",
+        "medications": [
+          "Paracetamol an toàn",
+          "Tránh Ibuprofen trong 3 tháng cuối",
+          "Tránh thuốc không kê đơn",
+          "Tham khảo bác sĩ trước khi dùng thuốc"
+        ],
+        "natural_remedies": [
+          "Nghỉ ngơi nhiều",
+          "Uống nước ấm",
+          "Súc họng nước muối",
+          "Hít hơi nước nóng"
+        ]
+      },
+      "elderly": {
+        "risks": "Nguy cơ biến chứng cao hơn",
+        "monitoring": "Theo dõi chặt chẽ triệu chứng",
+        "complications": "Viêm phổi, suy tim, suy hô hấp",
+        "prevention": "Tăng cường biện pháp phòng ngừa"
+      },
+      "immunocompromised": {
+        "risks": "Bệnh có thể kéo dài và nghiêm trọng hơn",
+        "treatment": "Cần theo dõi y tế chặt chẽ",
+        "prevention": "Biện pháp phòng ngừa nghiêm ngặt"
+      }
+    },
+    "recovery_timeline": {
+      "typical_duration": "7-10 ngày",
+      "stages": [
+        {
+          "days": "1-2",
+          "description": "Khởi phát triệu chứng, dễ lây nhiễm nhất"
+        },
+        {
+          "days": "3-5",
+          "description": "Triệu chứng nặng nhất"
+        },
+        {
+          "days": "6-10",
+          "description": "Triệu chứng giảm dần, phục hồi"
+        }
+      ],
+      "factors_affecting_recovery": [
+        "Tuổi tác",
+        "Tình trạng sức khỏe tổng thể",
+        "Hệ miễn dịch",
+        "Chăm sóc và điều trị",
+        "Nghỉ ngơi đầy đủ",
+        "Dinh dưỡng"
+      ]
+    },
+    "economic_impact": {
+      "work_days_lost": "Trung bình 2-3 ngày nghỉ làm",
+      "school_days_lost": "Trẻ em trung bình nghỉ học 5-7 ngày",
+      "healthcare_costs": "Chi phí điều trị thường thấp",
+      "prevention_cost_benefit": "Đầu tư phòng ngừa tiết kiệm chi phí điều trị"
+    }
+  },
+  "sources": [
+    "Medlatec.vn - Bệnh viện Đa khoa MEDLATEC",
+    "VNVC.vn - Hệ thống tiêm chủng VNVC",
+    "Vinmec.com - Bệnh viện Đa khoa Quốc tế Vinmec",
+    "Tamanhhospital.vn - Bệnh viện Đa khoa Tâm Anh",
+    "WHO Guidelines on Cold Management",
+    "CDC - Centers for Disease Control and Prevention"
+  ],
+  "medical_disclaimer": "Thông tin này chỉ mang tính chất tham khảo. Luôn tham khảo ý kiến bác sĩ chuyên khoa để được chẩn đoán và điều trị chính xác.",
+  "chatbot_intents": {
+    "symptoms": [
+      "triệu chứng cảm lạnh",
+      "dấu hiệu cảm lạnh",
+      "biểu hiện cảm lạnh",
+      "cảm lạnh có triệu chứng gì"
+    ],
+    "treatment": [
+      "điều trị cảm lạnh",
+      "chữa cảm lạnh",
+      "thuốc cảm lạnh",
+      "cách trị cảm lạnh"
+    ],
+    "prevention": [
+      "phòng ngừa cảm lạnh",
+      "tránh cảm lạnh",
+      "ngăn ngừa cảm lạnh"
+    ],
+    "causes": [
+      "nguyên nhân cảm lạnh",
+      "tại sao bị cảm lạnh",
+      "cảm lạnh do đâu"
+    ],
+    "complications": [
+      "biến chứng cảm lạnh",
+      "cảm lạnh có nguy hiểm không",
+      "cảm lạnh gây gì"
+    ],
+    "children": [
+      "cảm lạnh ở trẻ em",
+      "trẻ bị cảm lạnh",
+      "điều trị cảm lạnh cho trẻ"
+    ],
+    "when_to_see_doctor": [
+      "khi nào cần đi khám",
+      "cảm lạnh khi nào đến bệnh viện",
+      "triệu chứng nguy hiểm"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+# Git LFS tracking for large files
+*.pkl filter=lfs diff=lfs merge=lfs -text
+*.h5 filter=lfs diff=lfs merge=lfs -text
+*.model filter=lfs diff=lfs merge=lfs -text
+*.joblib filter=lfs diff=lfs merge=lfs -text
+*.csv filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.tar.gz filter=lfs diff=lfs merge=lfs -text
+*.rar filter=lfs diff=lfs merge=lfs -text
+# Exclude small test/sample files from LFS
+**/sample*.csv !filter !diff !merge text
+**/test*.csv !filter !diff !merge text
+# Database files
+*.db filter=lfs diff=lfs merge=lfs -text
+*.sqlite filter=lfs diff=lfs merge=lfs -text
+*.sqlite3 filter=lfs diff=lfs merge=lfs -text
+# Large datasets
+**/dataset*.csv filter=lfs diff=lfs merge=lfs -text
+**/data*.csv filter=lfs diff=lfs merge=lfs -text
+healthcare_dataset.csv filter=lfs diff=lfs merge=lfs -text 

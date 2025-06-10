@@ -1,0 +1,258 @@
+{
+  "ontology": {
+    "version": "1.0",
+    "last_updated": "2024-03-20",
+    "language": "vi",
+    "classes": {
+      "Disease": {
+        "properties": {
+          "name": "Cúm",
+          "scientific_name": "Influenza",
+          "type": "Viral Disease",
+          "icd_10_code": "J10-J11",
+          "classification": "Bệnh truyền nhiễm nhóm B",
+          "transmission_method": ["Respiratory droplets", "Direct contact"],
+          "severity_level": ["Mild", "Moderate", "Severe"]
+        }
+      },
+      "Virus": {
+        "properties": {
+          "name": "String",
+          "family": "Orthomyxoviridae",
+          "type": ["A", "B", "C"],
+          "subtypes": ["String"],
+          "characteristics": "String"
+        }
+      },
+      "Symptom": {
+        "properties": {
+          "name": "String",
+          "severity": ["Mild", "Moderate", "Severe"],
+          "duration": "String",
+          "common_in": ["Children", "Adults", "Elderly"],
+          "onset": "String"
+        }
+      },
+      "Treatment": {
+        "properties": {
+          "name": "String",
+          "type": ["Medication", "Supportive care"],
+          "effectiveness": ["High", "Medium", "Low"],
+          "side_effects": ["String"],
+          "contraindications": ["String"]
+        }
+      },
+      "Prevention": {
+        "properties": {
+          "name": "String",
+          "type": ["Vaccination", "Behavioral", "Environmental"],
+          "effectiveness": ["High", "Medium", "Low"],
+          "target_audience": ["All", "High-risk", "Children", "Elderly"]
+        }
+      },
+      "Vaccine": {
+        "properties": {
+          "name": "String",
+          "type": "String",
+          "efficacy": "Number",
+          "doses_required": "Number",
+          "storage_requirements": "String",
+          "side_effects": ["String"]
+        }
+      },
+      "RiskGroup": {
+        "properties": {
+          "name": "String",
+          "risk_level": ["High", "Medium", "Low"],
+          "age_group": "String",
+          "conditions": ["String"]
+        }
+      },
+      "Complication": {
+        "properties": {
+          "name": "String",
+          "severity": ["Mild", "Moderate", "Severe"],
+          "risk_factors": ["String"],
+          "treatment": ["String"]
+        }
+      }
+    },
+    "relationships": {
+      "Disease_caused_by": "Disease -> caused_by -> Virus",
+      "Disease_has_symptom": "Disease -> has_symptom -> Symptom",
+      "Disease_can_be_treated_by": "Disease -> can_be_treated_by -> Treatment",
+      "Disease_can_be_prevented_by": "Disease -> can_be_prevented_by -> Prevention",
+      "Disease_has_vaccine": "Disease -> has_vaccine -> Vaccine",
+      "Disease_affects_risk_group": "Disease -> affects_risk_group -> RiskGroup",
+      "Disease_can_lead_to": "Disease -> can_lead_to -> Complication",
+      "Symptom_requires_treatment": "Symptom -> requires_treatment -> Treatment",
+      "Prevention_includes_vaccine": "Prevention -> includes_vaccine -> Vaccine"
+    },
+    "instances": {
+      "diseases": [
+        {
+          "id": "flu",
+          "name": "Cúm",
+          "scientific_name": "Influenza",
+          "icd_10_code": "J10-J11",
+          "classification": "Bệnh truyền nhiễm nhóm B",
+          "transmission_method": ["Lây qua đường hô hấp", "Tiếp xúc trực tiếp"],
+          "severity_level": ["Nhẹ", "Trung bình", "Nặng"]
+        }
+      ],
+      "viruses": [
+        {
+          "id": "flu_a",
+          "name": "Cúm A",
+          "family": "Orthomyxoviridae",
+          "type": "A",
+          "subtypes": ["H1N1", "H3N2"],
+          "characteristics": "Có khả năng gây bệnh cho cả người và nhiều loài động vật"
+        },
+        {
+          "id": "flu_b",
+          "name": "Cúm B",
+          "family": "Orthomyxoviridae",
+          "type": "B",
+          "lineages": ["B/Yamagata", "B/Victoria"],
+          "characteristics": "Chủ yếu gây bệnh ở người"
+        },
+        {
+          "id": "flu_c",
+          "name": "Cúm C",
+          "family": "Orthomyxoviridae",
+          "type": "C",
+          "characteristics": "Thường gây bệnh nhẹ ở đường hô hấp trên"
+        }
+      ],
+      "symptoms": [
+        {
+          "id": "fever",
+          "name": "Sốt cao",
+          "severity": "Moderate",
+          "duration": "2-7 ngày",
+          "common_in": ["All"],
+          "onset": "Đột ngột"
+        },
+        {
+          "id": "chills",
+          "name": "Ớn lạnh, rét run",
+          "severity": "Mild",
+          "duration": "1-3 ngày",
+          "common_in": ["All"]
+        },
+        {
+          "id": "headache",
+          "name": "Đau đầu",
+          "severity": "Mild",
+          "duration": "2-4 ngày",
+          "common_in": ["Adults"]
+        }
+      ],
+      "treatments": [
+        {
+          "id": "antiviral",
+          "name": "Thuốc kháng virus",
+          "type": "Medication",
+          "effectiveness": "High",
+          "side_effects": ["Buồn nôn", "Nôn"],
+          "contraindications": "Dị ứng với thành phần thuốc"
+        },
+        {
+          "id": "supportive_care",
+          "name": "Chăm sóc hỗ trợ",
+          "type": "Supportive care",
+          "effectiveness": "Medium",
+          "description": "Nghỉ ngơi, uống nhiều nước, ăn thức ăn dễ tiêu"
+        }
+      ],
+      "preventions": [
+        {
+          "id": "vaccination",
+          "name": "Tiêm phòng vắc xin",
+          "type": "Vaccination",
+          "effectiveness": "High",
+          "target_audience": "All"
+        },
+        {
+          "id": "hygiene",
+          "name": "Vệ sinh cá nhân",
+          "type": "Behavioral",
+          "effectiveness": "High",
+          "description": "Rửa tay thường xuyên, đeo khẩu trang"
+        }
+      ],
+      "risk_groups": [
+        {
+          "id": "elderly",
+          "name": "Người cao tuổi",
+          "risk_level": "High",
+          "age_group": "65+",
+          "conditions": ["Bệnh tim mạch", "Bệnh phổi"]
+        },
+        {
+          "id": "children",
+          "name": "Trẻ em",
+          "risk_level": "High",
+          "age_group": "0-5",
+          "conditions": ["Hệ miễn dịch yếu"]
+        }
+      ],
+      "complications": [
+        {
+          "id": "pneumonia",
+          "name": "Viêm phổi",
+          "severity": "Severe",
+          "risk_factors": ["Người cao tuổi", "Bệnh phổi mạn tính"],
+          "treatment": ["Kháng sinh", "Hỗ trợ hô hấp"]
+        },
+        {
+          "id": "myocarditis",
+          "name": "Viêm cơ tim",
+          "severity": "Severe",
+          "risk_factors": ["Người có bệnh tim"],
+          "treatment": ["Điều trị hỗ trợ", "Theo dõi tim mạch"]
+        }
+      ]
+    }
+  },
+  "qa_pairs": {
+    "categories": {
+      "thong_tin_chung": {
+        "title": "Thông tin chung về bệnh cúm",
+        "intent": ["cúm là gì", "thông tin cúm", "influenza"],
+        "data": [
+          {
+            "question": "Bệnh cúm là gì?",
+            "answer": "Cúm là một bệnh nhiễm virus cấp tính đường hô hấp, do virus cúm (Influenza virus) gây ra. Bệnh tấn công vào hệ hô hấp bao gồm mũi, cổ họng, các ống phế quản và có thể cả phổi.",
+            "keywords": ["cúm", "influenza", "virus", "đường hô hấp"],
+            "related_instances": ["flu"]
+          }
+        ]
+      }
+    }
+  },
+  "chatbot_responses": {
+    "greetings": [
+      "Xin chào! Tôi là trợ lý ảo về bệnh cúm. Tôi có thể giúp bạn tìm hiểu về bệnh cúm, triệu chứng, cách phòng ngừa và điều trị. Bạn cần hỗ trợ thông tin gì?",
+      "Chào bạn! Tôi sẵn sàng hỗ trợ bạn các thông tin về bệnh cúm. Hãy hỏi tôi bất cứ điều gì bạn muốn biết về căn bệnh này."
+    ],
+    "fallback": [
+      "Xin lỗi, tôi không hiểu câu hỏi của bạn. Bạn có thể hỏi lại bằng cách khác được không?",
+      "Tôi chưa tìm thấy thông tin phù hợp với câu hỏi của bạn. Bạn có thể hỏi về: triệu chứng cúm, cách phòng ngừa, điều trị, vắc xin, hoặc các biến chứng."
+    ],
+    "emergency": [
+      "⚠️ KHẨN CẤP: Nếu bạn đang gặp khó thở nghiêm trọng, đau ngực dai dẳng, lú lẫn hoặc môi xanh tím, hãy gọi cấp cứu 115 NGAY LẬP TỨC!"
+    ]
+  },
+  "metadata": {
+    "created_by": "Flu Information Assistant",
+    "purpose": "Ontology-based knowledge base for Influenza information",
+    "target_audience": "Vietnamese speakers",
+    "compliance": "Based on WHO and Vietnam Ministry of Health guidelines",
+    "contact_info": {
+      "emergency": "115",
+      "health_ministry_hotline": "19003228"
+    }
+  }
+}

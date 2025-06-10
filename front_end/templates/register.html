@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký - Healthcare System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+        .register-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        .register-title {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+        }
+        .form-control {
+            border-radius: 5px;
+            padding: 0.8rem;
+        }
+        .btn-register {
+            background: #3498db;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 5px;
+            width: 100%;
+            color: white;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        .btn-register:hover {
+            background: #2980b9;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        .form-row > div {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2 class="register-title">Đăng ký tài khoản</h2>
+        <form id="registerForm">
+            <div class="form-row">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Tên đăng nhập <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="username" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="mb-3">
+                    <label for="password" class="form-label">Mật khẩu <span class="text-danger">*</span></label>
+                    <input type="password" class="form-control" id="password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="role" class="form-label">Vai trò <span class="text-danger">*</span></label>
+                    <select class="form-control" id="role" required>
+                        <option value="PATIENT">Bệnh nhân</option>
+                        <option value="DOCTOR">Bác sĩ</option>
+                        <option value="NURSE">Y tá</option>
+                        <option value="ADMIN">Quản trị viên</option>
+                        <option value="PHARMACIST">Dược sĩ</option>
+                        <option value="INSURANCE">Nhân viên bảo hiểm</option>
+                        <option value="LAB_TECHNICIAN">Kỹ thuật viên xét nghiệm</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Số điện thoại</label>
+                    <input type="tel" class="form-control" id="phone">
+                </div>
+                <div class="mb-3">
+                    <label for="date_of_birth" class="form-label">Ngày sinh <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" id="date_of_birth" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="mb-3">
+                    <label for="address" class="form-label">Địa chỉ</label>
+                    <input type="text" class="form-control" id="address">
+                </div>
+                <div class="mb-3">
+                    <label for="city" class="form-label">Thành phố</label>
+                    <input type="text" class="form-control" id="city">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-register">Đăng ký</button>
+        </form>
+        <div class="login-link">
+            <p>Đã có tài khoản? <a href="/login">Đăng nhập</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const userData = {
+                email: document.getElementById('email').value,
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value,
+                role: document.getElementById('role').value,
+                phone: document.getElementById('phone').value || '',
+                profile: {
+                    date_of_birth: document.getElementById('date_of_birth').value || '',
+                    address: document.getElementById('address').value || '',
+                    city: document.getElementById('city').value || ''
+                }
+            };
+
+            try {
+                const response = await fetch('http://localhost:8080/api/users/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    alert('Đăng ký thành công! Vui lòng đăng nhập.');
+                    window.location.href = '/login';
+                } else {
+                    let errorMessage = '';
+                    if (data.error && data.error.includes('Auth service error')) {
+                        try {
+                            // Parse error message từ auth service
+                            const errorData = JSON.parse(data.error.replace('Auth service error: ', ''));
+                            if (errorData.email) {
+                                errorMessage += 'Email đã tồn tại.\n';
+                            }
+                            if (errorData.username) {
+                                errorMessage += 'Tên đăng nhập đã tồn tại.\n';
+                            }
+                        } catch (e) {
+                            errorMessage = data.error;
+                        }
+                    } else {
+                        errorMessage = data.detail || 'Vui lòng kiểm tra lại thông tin';
+                    }
+                    alert('Đăng ký thất bại: ' + errorMessage);
+                }
+            } catch (error) {
+                alert('Có lỗi xảy ra: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html> 

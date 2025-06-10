@@ -1,0 +1,913 @@
+{
+	"info": {
+		"_postman_id": "fa90e9ec-2f0a-49e2-98dd-833cb75be077",
+		"name": "Heal care",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "33433803"
+	},
+	"item": [
+		{
+			"name": "auth service",
+			"item": [
+				{
+					"name": "resgister",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"us1e3r1@example.com\",\n    \"username\": \"usưer1\",\n    \"password\": \"yourpassword\",\n    \"role\": \"PATIENT\",\n    \"phone\": \"0123456789\",\n    \"profile\": {\n      \"date_of_birth\": \"2000-01-01\",\n      \"address\": \"123 Đường ABC\",\n      \"city\": \"Hà Nội\"\n    }\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/users/"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Kiểm tra response thành công\r",
+									"if (pm.response.code === 200) {\r",
+									"    // Parse JSON response\r",
+									"    var jsonData = pm.response.json();\r",
+									"    \r",
+									"    // Lưu access token vào biến auth_token\r",
+									"    pm.environment.set(\"auth_token\", jsonData.access);\r",
+									"    \r",
+									"    // Lưu refresh token vào biến refresh_token\r",
+									"    pm.environment.set(\"refresh_token\", jsonData.refresh);\r",
+									"    \r",
+									"    // Log để kiểm tra\r",
+									"    console.log(\"Access Token đã lưu: \" + jsonData.access);\r",
+									"    console.log(\"Refresh Token đã lưu: \" + jsonData.refresh);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user1@example.com\",\n    \"password\": \"yourpassword\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/users/login/"
+					},
+					"response": []
+				},
+				{
+					"name": "lấy thông tin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": "{{url}}/api/users/me/"
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh\": \"<REFRESH_TOKEN>\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/users/logout/"
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Kiểm tra response thành công\r",
+									"if (pm.response.code === 200) {\r",
+									"    // Parse JSON response\r",
+									"    var jsonData = pm.response.json();\r",
+									"    \r",
+									"    // Lưu access token mới vào biến auth_token\r",
+									"    pm.environment.set(\"auth_token\", jsonData.access);\r",
+									"    \r",
+									"    // Log để kiểm tra\r",
+									"    console.log(\"Access Token mới đã lưu: \" + jsonData.access);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh\": \"{{refresh_token}}\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/token/refresh/"
+					},
+					"response": []
+				},
+				{
+					"name": "get_users_by_role",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Kiểm tra response thành công\r",
+									"if (pm.response.code === 200) {\r",
+									"    // Parse JSON response\r",
+									"    var jsonData = pm.response.json();\r",
+									"    \r",
+									"    // Lưu access token mới vào biến auth_token\r",
+									"    pm.environment.set(\"auth_token\", jsonData.access);\r",
+									"    \r",
+									"    // Log để kiểm tra\r",
+									"    console.log(\"Access Token mới đã lưu: \" + jsonData.access);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/get_users_by_role/?role=DOCTOR",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"get_users_by_role",
+								""
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "DOCTOR"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "patient service",
+			"item": [
+				{
+					"name": "Thông tin bệnh nhân",
+					"item": [
+						{
+							"name": "đăng ký bệnh nhân",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"Nguyễn\",\n    \"last_name\": \"Văn A\",\n    \"date_of_birth\": \"1990-01-01\",\n    \"gender\": \"M\",\n    \"id_number\": \"123345236789\",\n    \"address\": \"123 Đường ABC, Quận XYZ, TP.HCM\",\n    \"phone_number\": \"0123456789\",\n    \"email\": \"nguyenvana@example.com\",\n    \"blood_type\": \"A+\",\n    \"medical_history\": \"Không có tiền sử bệnh\",\n    \"allergies\": \"Không có dị ứng\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/api/patients/"
+							},
+							"response": []
+						},
+						{
+							"name": "lây all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{url}}/api/patients/"
+							},
+							"response": []
+						},
+						{
+							"name": "Theo tên",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/patients/?search=Nguyễn",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"patients",
+										""
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "Nguyễn"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "lấy theo id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{url}}/api/patients/1/"
+							},
+							"response": []
+						},
+						{
+							"name": "cập nhật",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"first_name\": \"Nguyễn\",\n    \"last_name\": \"Văn A\",\n    \"date_of_birth\": \"1990-01-01\",\n    \"gender\": \"M\",\n    \"id_number\": \"123456789\",\n    \"address\": \"456 Đường XYZ, Quận ABC, TP.HCM\",\n    \"phone_number\": \"0987654321\",\n    \"email\": \"nguyenvana_new@example.com\",\n    \"blood_type\": \"A+\",\n    \"medical_history\": \"Có tiền sử bệnh tim\",\n    \"allergies\": \"Dị ứng với penicillin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/api/patients/2/"
+							},
+							"response": []
+						},
+						{
+							"name": "xóa",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:8000/api/patients/1/"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Hồ sơ",
+					"item": [
+						{
+							"name": "Thêm bệnh án",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"examination_date\": \"2024-03-20T10:00:00Z\",\n    \"diagnosis\": \"Viêm họng cấp\",\n    \"prescription\": \"Paracetamol 500mg, 3 lần/ngày\",\n    \"notes\": \"Bệnh nhân cần nghỉ ngơi và uống nhiều nước\",\n    \"doctor\": \"BS. Nguyễn Văn A\",\n    \"department\": \"Khoa Tai Mũi Họng\",\n    \"treatment_status\": \"PENDING\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/api/patients/1/medical-records/"
+							},
+							"response": []
+						},
+						{
+							"name": "lấy all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{url}}/api/patients/1/medical-records/"
+							},
+							"response": []
+						},
+						{
+							"name": "Theo trạng thái điều trị",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/patients/1/medical-records/?treatment_status=PENDING",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"patients",
+										"1",
+										"medical-records",
+										""
+									],
+									"query": [
+										{
+											"key": "treatment_status",
+											"value": "PENDING"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "theo id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{url}}/api/patients/1/medical-records/2/"
+							},
+							"response": []
+						},
+						{
+							"name": "cập nhật",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"patient\": 2,\n    \"examination_date\": \"2024-03-20T10:00:00Z\",\n    \"diagnosis\": \"Viêm họng cấp\",\n    \"prescription\": \"Paracetamol 500mg, 3 lần/ngày, Amoxicillin 500mg, 2 lần/ngày\",\n    \"notes\": \"Bệnh nhân cần nghỉ ngơi và uống nhiều nước\",\n    \"doctor\": \"BS. Nguyễn Văn A\",\n    \"department\": \"Khoa Tai Mũi Họng\",\n    \"treatment_status\": \"IN_PROGRESS\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/api/patients/1/medical-records/1/"
+							},
+							"response": []
+						},
+						{
+							"name": "xóa",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:8000/api/patients/1/medical-records/2/"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "patients",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4MTcxNjU3LCJpYXQiOjE3NDgxNzEzNTcsImp0aSI6ImExY2U3YTU1NDU4MDQ5YWU5MWY5ZTliYTVjYWExZTU0IiwidXNlcl9pZCI6MX0.ArOwSOGoyqSm7rASFr1SPxBfPi7dOgJTnfh4rLy38ak"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"medical_record_number\": \"MRN001\",\n    \"blood_type\": \"A+\",\n    \"height\": 170,\n    \"weight\": 65,\n    \"emergency_contact_name\": \"Nguyen Van A\",\n    \"emergency_contact_phone\": \"0123456789\",\n    \"emergency_contact_relationship\": \"Father\",\n    \"allergies\": \"Penicillin\",\n    \"chronic_conditions\": \"Hypertension\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/patients/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "chat bot",
+			"item": [
+				{
+					"name": "chatbot",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer your_token_here"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"Tôi bị sốt và ho\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/chatbot/chat/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "Đặt lịch",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"patient_id\": 1,\n    \"doctor_id\": 2,\n    \"appointment_date\": \"2024-07-01T09:00:00Z\",\n    \"notes\": \"Khám tổng quát\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/appointments/"
+					},
+					"response": []
+				},
+				{
+					"name": "lấy ds",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/appointments/"
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"confirmed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "127.0.0.1:8080/api/appointments/1/"
+					},
+					"response": []
+				},
+				{
+					"name": "xóa",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{url}}/api/appointments/1/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pharmacy",
+			"item": [
+				{
+					"name": "Thêm thuốc",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Paracetamol 500mg\",\n    \"description\": \"Thuốc giảm đau, hạ sốt\",\n    \"price\": \"25000.00\",\n    \"quantity\": 100,\n    \"manufacturer\": \"Sanofi\",\n    \"expiry_date\": \"2025-12-31\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/medicines/"
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy ds thuốc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/medicines/"
+					},
+					"response": []
+				},
+				{
+					"name": "lấy 1 thuốc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/medicines/2/"
+					},
+					"response": []
+				},
+				{
+					"name": "cập nhật all",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Paracetamol 500mg\",\n    \"description\": \"Thuốc giảm đau, hạ sốt\",\n    \"price\": \"30000.00\",\n    \"quantity\": 150,\n    \"manufacturer\": \"Sanofi\",\n    \"expiry_date\": \"2025-12-31\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/medicines/1/"
+					},
+					"response": []
+				},
+				{
+					"name": "cập nhật 1 phần",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": \"35000.00\",\n    \"quantity\": 200\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/medicines/1/"
+					},
+					"response": []
+				},
+				{
+					"name": "xóa thuốc",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{url}}/api/medicines/1/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "clinical service",
+			"item": [
+				{
+					"name": "Tạo đơn thuốc",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"medicine_id\": \"2\",\n    \"medical_record_id\": \"1\",\n    \"patient_id\": \"1\",\n    \"quantity\": 2,\n    \"dosage\": \"1 viên/ngày\",\n    \"notes\": \"Uống sau bữa ăn\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/api/prescriptions/"
+					},
+					"response": []
+				},
+				{
+					"name": "lấy thuốc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/prescriptions/"
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy theo id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/prescriptions/?id=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"prescriptions",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment",
+			"item": [
+				{
+					"name": "Lấy thông tin thanh toán",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": "{{url}}/api/patients/1/medical-records/1/payment/"
+					},
+					"response": []
+				},
+				{
+					"name": "Phê duyệt thanh toán",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"payment_id\": 1,\n    \"payment_status\": \"COMPLETED\"\n}\n\n//FAILED",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:8000/api/payments/approve/"
+					},
+					"response": []
+				},
+				{
+					"name": "ds thanh toans",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{url}}/api/payments/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "base project",
+			"item": [
+				{
+					"name": "Mono",
+					"item": [
+						{
+							"name": "đặt lịch",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n         \"patient_id\": 1,\n         \"doctor_id\": 2,\n         \"date\": \"2025-06-01T09:00:00\"\n     }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/appointment/make/"
+							},
+							"response": []
+						},
+						{
+							"name": "seed-data",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"clear_existing\": true}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8000/seed-data/"
+							},
+							"response": []
+						},
+						{
+							"name": "lấy bênh nhân",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8000/patient/1/"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "microservice",
+					"item": [
+						{
+							"name": "patients",
+							"item": [
+								{
+									"name": "patients",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "http://localhost:8000/api/patients/record/1/"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "doctor",
+							"item": [
+								{
+									"name": "doctor",
+									"request": {
+										"method": "GET",
+										"header": []
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "appointment",
+							"item": [
+								{
+									"name": "appointment",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"patient_id\": 1,\n    \"doctor_id\": 1,\n    \"date\": \"2025-06-09T15:00:00Z\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "http://localhost:8001/appointment/make/"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

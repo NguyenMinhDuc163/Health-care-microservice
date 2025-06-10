@@ -1,0 +1,194 @@
+{
+    "knowledge_base_name": "Thông tin về bệnh dị ứng",
+    "description": "Cơ sở kiến thức này chứa thông tin tổng quan về bệnh dị ứng, bao gồm định nghĩa, nguyên nhân, triệu chứng, chẩn đoán và phương pháp điều trị.",
+    "topics": [
+      {
+        "name": "Tổng quan về dị ứng",
+        "information": {
+          "definition": "Dị ứng là một phản ứng của hệ thống miễn dịch đối với các chất thường vô hại với hầu hết mọi người (dị nguyên). Khi một người bị dị ứng tiếp xúc với dị nguyên, hệ thống miễn dịch của họ phản ứng lại như thể đó là một mối đe dọa, ví dụ như vi trùng hoặc virus.",
+          "mechanism": "Khi cơ thể tiếp xúc với một dị nguyên, hệ thống miễn dịch sẽ sản xuất ra các kháng thể đặc hiệu gọi là Immunoglobulin E (IgE). Các kháng thể IgE này gắn vào các tế bào mast có trong da, đường hô hấp và đường tiêu hóa. Khi tiếp xúc lại với cùng một dị nguyên, dị nguyên sẽ gắn vào các kháng thể IgE trên tế bào mast, khiến các tế bào này giải phóng ra các hóa chất trung gian (như histamine), gây ra các triệu chứng dị ứng."
+        }
+      },
+      {
+        "name": "Nguyên nhân gây dị ứng",
+        "information": {
+          "common_allergens": [
+            {
+              "category": "Thực phẩm",
+              "examples": ["Protein trong một số loại thực phẩm (ví dụ: đậu phộng, sữa, trứng, hải sản)"],
+              "description": "Phản ứng mạnh mẽ của hệ miễn dịch với các thành phần nhất định trong thực phẩm."
+            },
+            {
+              "category": "Môi trường và không khí",
+              "examples": ["Phấn hoa từ cây, cỏ, hoặc cỏ dại", "Mạt bụi nhà", "Nấm mốc", "Lông động vật (chó, mèo)", "Chất tiết của côn trùng"],
+              "description": "Các chất trong không khí hít vào, có thể gây dị ứng lâu năm hoặc theo mùa."
+            },
+            {
+              "category": "Thuốc",
+              "examples": ["Thuốc kháng sinh (ví dụ: penicillin)", "Thuốc chống viêm không steroid (NSAID)", "Insulin", "Thuốc hóa trị"],
+              "description": "Một số loại thuốc có thể gây ra phản ứng dị ứng ở một số người."
+            },
+            {
+              "category": "Mỹ phẩm và hóa chất",
+              "examples": ["Hương liệu", "Chất bảo quản", "Thành phần gây kích ứng da trong mỹ phẩm", "Hóa chất trong các sản phẩm tẩy rửa"],
+              "description": "Các thành phần trong mỹ phẩm hoặc hóa chất gia dụng có thể gây kích ứng da hoặc phản ứng dị ứng."
+            },
+            {
+              "category": "Vật nuôi",
+              "examples": ["Protein trong da, nước bọt, hoặc nước tiểu của vật nuôi"],
+              "description": "Không phải lông mà là các protein từ da, nước bọt của vật nuôi thường là nguyên nhân chính."
+            },
+            {
+              "category": "Mùi hương nhân tạo",
+              "examples": ["Nước hoa", "Chất tạo mùi trong các sản phẩm"],
+              "description": "Một số mùi hương mạnh có thể kích hoạt triệu chứng dị ứng."
+            },
+            {
+              "category": "Mủ cao su (Latex)",
+              "examples": ["Găng tay cao su", "Bóng bay", "Bao cao su"],
+              "description": "Protein trong mủ cao su tự nhiên có thể gây dị ứng."
+            },
+            {
+              "category": "Nọc độc/Côn trùng đốt",
+              "examples": ["Nọc độc từ ong, kiến lửa"],
+              "description": "Phản ứng dị ứng với nọc độc khi bị côn trùng đốt."
+            }
+          ]
+        }
+      },
+      {
+        "name": "Triệu chứng dị ứng",
+        "information": {
+          "common_symptoms": [
+            {
+              "system": "Hô hấp",
+              "symptoms": ["Tắc nghẽn mũi", "Ngứa mũi và họng", "Chảy nước mũi", "Hắt hơi", "Tiết đờm", "Ho", "Khó thở", "Thở khò khè"]
+            },
+            {
+              "system": "Mắt",
+              "symptoms": ["Ngứa mắt", "Chảy nước mắt", "Đỏ mắt", "Sưng vùng mắt"]
+            },
+            {
+              "system": "Tiêu hóa",
+              "symptoms": ["Buồn nôn", "Nôn mửa", "Đau bụng", "Tiêu chảy"]
+            },
+            {
+              "system": "Da",
+              "symptoms": ["Phát ban", "Mề đay", "Ngứa da", "Nổi mụn nước", "Bong tróc da", "Chàm (eczema)"]
+            },
+            {
+              "system": "Toàn thân (nghiêm trọng)",
+              "symptoms": ["Sưng mặt, môi, lưỡi, hoặc cổ họng", "Chóng mặt", "Ngất xỉu", "Sốc phản vệ (phản ứng dị ứng nghiêm trọng, đe dọa tính mạng, cần cấp cứu y tế ngay lập tức)"]
+            }
+          ],
+          "note": "Mức độ nghiêm trọng và loại triệu chứng có thể khác nhau tùy thuộc vào cá nhân và loại dị nguyên."
+        }
+      },
+      {
+        "name": "Chẩn đoán dị ứng",
+        "information": {
+          "methods": [
+            {
+              "name": "Khai thác bệnh sử và khám lâm sàng",
+              "description": "Bác sĩ sẽ hỏi về các triệu chứng, tiền sử bệnh của bản thân và gia đình, các yếu tố nghi ngờ gây dị ứng."
+            },
+            {
+              "name": "Xét nghiệm da (Skin prick test)",
+              "description": "Chích một lượng nhỏ các chất gây dị ứng nghi ngờ vào da (thường là ở cẳng tay hoặc lưng) và quan sát phản ứng tại chỗ sau khoảng 15-20 phút. Nếu xuất hiện nốt sẩn ngứa, đỏ, điều đó cho thấy có thể dị ứng với chất đó."
+            },
+            {
+              "name": "Xét nghiệm máu (xét nghiệm IgE đặc hiệu)",
+              "description": "Đo lường lượng kháng thể IgE đặc hiệu với từng dị nguyên trong máu. Xét nghiệm này hữu ích khi xét nghiệm da không thể thực hiện được (ví dụ: do đang dùng thuốc kháng histamine, hoặc có bệnh da lan rộng)."
+            },
+            {
+              "name": "Test áp bì (Patch test)",
+              "description": "Sử dụng để chẩn đoán viêm da tiếp xúc dị ứng. Các miếng dán chứa dị nguyên nghi ngờ được dán lên da lưng trong 48 giờ, sau đó đọc kết quả."
+            },
+            {
+              "name": "Test thử thách (Provocation test)",
+              "description": "Được thực hiện dưới sự giám sát chặt chẽ của bác sĩ, bệnh nhân được cho tiếp xúc với một lượng nhỏ dị nguyên nghi ngờ (qua đường ăn uống hoặc hít) để xem có xuất hiện triệu chứng hay không. Thường được dùng khi các xét nghiệm khác không rõ ràng."
+            }
+          ]
+        }
+      },
+      {
+        "name": "Điều trị và quản lý dị ứng",
+        "information": {
+          "approaches": [
+            {
+              "method": "Tránh tiếp xúc với dị nguyên",
+              "description": "Đây là biện pháp quan trọng nhất. Xác định và tránh xa các chất gây dị ứng cho bạn."
+            },
+            {
+              "method": "Thuốc",
+              "types": [
+                {
+                  "name": "Thuốc kháng histamine",
+                  "forms": ["Viên uống", "Tiêm", "Xịt mũi", "Dạng lỏng", "Thuốc nhỏ mắt"],
+                  "action": "Giúp giảm các triệu chứng như ngứa, hắt hơi, chảy nước mũi, nổi mề đay."
+                },
+                {
+                  "name": "Thuốc thông mũi (decongestants)",
+                  "forms": ["Viên uống", "Xịt mũi"],
+                  "action": "Giúp giảm nghẹt mũi. Không nên dùng kéo dài dạng xịt.",
+                  "examples": ["Oxymetazolin", "Phenylephrine", "Pseudoephedrine"]
+                },
+                {
+                  "name": "Corticosteroid",
+                  "forms": ["Xịt mũi", "Hít", "Uống", "Tiêm", "Kem bôi da"],
+                  "action": "Giúp giảm viêm. Corticosteroid dạng xịt mũi thường được dùng cho viêm mũi dị ứng. Dạng uống hoặc tiêm dùng cho các trường hợp nặng hơn và cần theo chỉ định của bác sĩ."
+                },
+                {
+                  "name": "Thuốc ổn định tế bào mast",
+                  "forms": ["Xịt mũi", "Thuốc nhỏ mắt"],
+                  "action": "Ngăn chặn việc giải phóng histamine và các hóa chất trung gian khác từ tế bào mast.",
+                  "examples": ["Cromolyn natri"]
+                },
+                {
+                  "name": "Thuốc đối kháng leukotriene",
+                  "forms": ["Viên uống"],
+                  "action": "Chặn tác động của leukotriene, các hóa chất gây viêm trong phản ứng dị ứng, đặc biệt hữu ích cho hen suyễn và viêm mũi dị ứng."
+                },
+                {
+                  "name": "Thuốc trị hen suyễn",
+                  "types": ["Thuốc giãn phế quản", "Steroid dạng hít", "Thuốc kháng leukotriene", "Thuốc tiêm sinh học"],
+                  "action": "Kiểm soát triệu chứng hen suyễn do dị ứng."
+                },
+                {
+                  "name": "Epinephrine tự tiêm (EpiPen)",
+                  "action": "Dùng trong trường hợp khẩn cấp của sốc phản vệ. Người có tiền sử sốc phản vệ nên luôn mang theo."
+                }
+              ]
+            },
+            {
+              "method": "Liệu pháp miễn dịch (Immunotherapy - tiêm giải mẫn cảm)",
+              "description": "Một phương pháp điều trị lâu dài nhằm thay đổi phản ứng của hệ miễn dịch với dị nguyên. Bệnh nhân được tiêm liều tăng dần của dị nguyên trong một khoảng thời gian để cơ thể quen dần và giảm phản ứng dị ứng. Có thể dưới dạng tiêm hoặc ngậm dưới lưỡi."
+            },
+            {
+              "method": "Biện pháp phòng ngừa tại nhà và thay đổi lối sống",
+              "actions": [
+                "Giữ nhà cửa sạch sẽ, thông thoáng.",
+                "Sử dụng máy lọc không khí.",
+                "Thường xuyên giặt ga trải giường, vỏ gối bằng nước nóng.",
+                "Hạn chế tiếp xúc với vật nuôi nếu dị ứng với lông động vật.",
+                "Kiểm soát độ ẩm trong nhà để tránh nấm mốc.",
+                "Đọc kỹ nhãn thực phẩm để tránh các thành phần gây dị ứng."
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "Khi nào cần gặp bác sĩ",
+        "information": {
+          "recommendations": [
+            "Khi triệu chứng dị ứng ảnh hưởng đến chất lượng cuộc sống hàng ngày.",
+            "Khi các thuốc không kê đơn không kiểm soát được triệu chứng.",
+            "Khi nghi ngờ bị dị ứng nặng hoặc có dấu hiệu của sốc phản vệ (khó thở, sưng họng, chóng mặt nghiêm trọng) - cần đến cơ sở y tế ngay lập tức.",
+            "Khi muốn xác định chính xác nguyên nhân gây dị ứng.",
+            "Khi cân nhắc liệu pháp miễn dịch."
+          ]
+        }
+      }
+    ]
+  }

@@ -1,0 +1,268 @@
+{
+  "ontology": {
+    "version": "1.0",
+    "last_updated": "2024-03-20",
+    "language": "vi",
+    "classes": {
+      "Disease": {
+        "properties": {
+          "name": "Cảm lạnh",
+          "scientific_name": "Common Cold",
+          "type": "Viral Disease",
+          "icd_10": "J00",
+          "classification": "Bệnh đường hô hấp trên",
+          "transmission_method": ["Respiratory droplets", "Direct contact", "Surface contact"],
+          "severity_level": ["Mild", "Moderate"]
+        }
+      },
+      "Virus": {
+        "properties": {
+          "name": "String",
+          "type": "String",
+          "percentage": "Number",
+          "description": "String",
+          "characteristics": "String"
+        }
+      },
+      "Symptom": {
+        "properties": {
+          "name": "String",
+          "stage": "String",
+          "frequency": "String",
+          "duration": "String",
+          "description": "String",
+          "common_in": ["Children", "Adults", "Elderly"]
+        }
+      },
+      "Treatment": {
+        "properties": {
+          "name": "String",
+          "type": ["Medication", "Home remedy", "Supportive care"],
+          "effectiveness": ["High", "Medium", "Low"],
+          "side_effects": ["String"],
+          "contraindications": ["String"],
+          "dosage": "String"
+        }
+      },
+      "Prevention": {
+        "properties": {
+          "name": "String",
+          "type": ["Personal hygiene", "Environmental", "Lifestyle", "Social"],
+          "effectiveness": ["High", "Medium", "Low"],
+          "target_audience": ["All", "Children", "Elderly", "Pregnant women"]
+        }
+      },
+      "Complication": {
+        "properties": {
+          "name": "String",
+          "frequency": "String",
+          "symptoms": ["String"],
+          "treatment": "String",
+          "risk_factors": ["String"]
+        }
+      },
+      "RiskGroup": {
+        "properties": {
+          "name": "String",
+          "risk_level": ["High", "Medium", "Low"],
+          "age_group": "String",
+          "conditions": ["String"]
+        }
+      },
+      "Nutrition": {
+        "properties": {
+          "food": "String",
+          "type": ["Recommended", "Avoid"],
+          "benefit": "String",
+          "examples": ["String"]
+        }
+      }
+    },
+    "relationships": {
+      "Disease_caused_by": "Disease -> caused_by -> Virus",
+      "Disease_has_symptom": "Disease -> has_symptom -> Symptom",
+      "Disease_can_be_treated_by": "Disease -> can_be_treated_by -> Treatment",
+      "Disease_can_be_prevented_by": "Disease -> can_be_prevented_by -> Prevention",
+      "Disease_can_lead_to": "Disease -> can_lead_to -> Complication",
+      "Disease_affects_risk_group": "Disease -> affects_risk_group -> RiskGroup",
+      "Disease_requires_nutrition": "Disease -> requires_nutrition -> Nutrition",
+      "Symptom_requires_treatment": "Symptom -> requires_treatment -> Treatment",
+      "Complication_requires_treatment": "Complication -> requires_treatment -> Treatment"
+    },
+    "instances": {
+      "diseases": [
+        {
+          "id": "common_cold",
+          "name": "Cảm lạnh",
+          "scientific_name": "Common Cold",
+          "icd_10": "J00",
+          "classification": "Bệnh đường hô hấp trên",
+          "transmission_method": ["Đường hô hấp", "Tiếp xúc trực tiếp", "Bề mặt nhiễm virus"],
+          "severity_level": ["Nhẹ", "Trung bình"]
+        }
+      ],
+      "viruses": [
+        {
+          "id": "rhinovirus",
+          "name": "Rhinovirus",
+          "type": "virus",
+          "percentage": 55,
+          "description": "Nguyên nhân phổ biến nhất, có hơn 100 chủng khác nhau"
+        },
+        {
+          "id": "enterovirus",
+          "name": "Enterovirus",
+          "type": "virus",
+          "percentage": 12,
+          "description": "Bao gồm Echovirus và Coxsackievirus"
+        }
+      ],
+      "symptoms": [
+        {
+          "id": "runny_nose",
+          "name": "Chảy nước mũi",
+          "stage": "Giai đoạn 1",
+          "frequency": "Rất phổ biến",
+          "duration": "2-3 ngày",
+          "description": "Ban đầu nước mũi trong, sau đó đặc và có màu"
+        },
+        {
+          "id": "sore_throat",
+          "name": "Đau họng",
+          "stage": "Giai đoạn 1",
+          "frequency": "Phổ biến",
+          "duration": "2-3 ngày",
+          "description": "Cảm giác ngứa, khô họng"
+        }
+      ],
+      "treatments": [
+        {
+          "id": "paracetamol",
+          "name": "Paracetamol",
+          "type": "Medication",
+          "effectiveness": "High",
+          "dosage": "500-1000mg mỗi 6-8 giờ",
+          "side_effects": ["Hiếm gặp"],
+          "contraindications": "Bệnh gan nặng"
+        },
+        {
+          "id": "rest",
+          "name": "Nghỉ ngơi",
+          "type": "Supportive care",
+          "effectiveness": "High",
+          "description": "Ngủ đủ giấc, hạn chế hoạt động"
+        }
+      ],
+      "preventions": [
+        {
+          "id": "hand_washing",
+          "name": "Rửa tay",
+          "type": "Personal hygiene",
+          "effectiveness": "High",
+          "description": "Rửa tay thường xuyên bằng xà phòng ít nhất 20 giây"
+        },
+        {
+          "id": "mask_wearing",
+          "name": "Đeo khẩu trang",
+          "type": "Social",
+          "effectiveness": "High",
+          "description": "Đeo khẩu trang ở nơi đông người"
+        }
+      ],
+      "complications": [
+        {
+          "id": "otitis_media",
+          "name": "Viêm tai giữa",
+          "frequency": "5-10%",
+          "symptoms": ["Đau tai", "Nghe kém", "Sốt trở lại"],
+          "treatment": "Có thể cần kháng sinh"
+        },
+        {
+          "id": "sinusitis",
+          "name": "Viêm xoang cấp",
+          "frequency": "2-5%",
+          "symptoms": ["Đau mặt", "Nghẹt mũi kéo dài", "Dịch mũi mủ"],
+          "treatment": "Kháng sinh nếu do vi khuẩn"
+        }
+      ],
+      "risk_groups": [
+        {
+          "id": "children",
+          "name": "Trẻ em",
+          "risk_level": "High",
+          "age_group": "0-6 tuổi",
+          "conditions": ["Hệ miễn dịch yếu"]
+        },
+        {
+          "id": "elderly",
+          "name": "Người cao tuổi",
+          "risk_level": "High",
+          "age_group": "65+",
+          "conditions": ["Bệnh mãn tính", "Hệ miễn dịch suy yếu"]
+        }
+      ],
+      "nutrition": [
+        {
+          "id": "chicken_soup",
+          "food": "Súp gà",
+          "type": "Recommended",
+          "benefit": "Cung cấp nước, điện giải và có tính chất chống viêm nhẹ"
+        },
+        {
+          "id": "vitamin_c",
+          "food": "Trái cây giàu vitamin C",
+          "type": "Recommended",
+          "examples": ["Cam", "Chanh", "Kiwi", "Ổi"],
+          "benefit": "Tăng cường miễn dịch"
+        }
+      ]
+    }
+  },
+  "qa_pairs": {
+    "categories": {
+      "thong_tin_chung": {
+        "title": "Thông tin chung về cảm lạnh",
+        "intent": ["cảm lạnh là gì", "thông tin cảm lạnh", "common cold"],
+        "data": [
+          {
+            "question": "Cảm lạnh là gì?",
+            "answer": "Cảm lạnh là một bệnh lý phổ biến về đường hô hấp trên, do virus gây ra, thường tác động lên mũi, họng và xoang. Đây là bệnh lành tính, có thể tự khỏi sau 7-10 ngày.",
+            "keywords": ["cảm lạnh", "đường hô hấp trên", "virus", "lành tính"],
+            "related_instances": ["common_cold"]
+          }
+        ]
+      }
+    }
+  },
+  "chatbot_responses": {
+    "greetings": [
+      "Xin chào! Tôi là trợ lý ảo về bệnh cảm lạnh. Tôi có thể giúp bạn tìm hiểu về bệnh cảm lạnh, triệu chứng, cách phòng ngừa và điều trị. Bạn cần hỗ trợ thông tin gì?",
+      "Chào bạn! Tôi sẵn sàng hỗ trợ bạn các thông tin về bệnh cảm lạnh. Hãy hỏi tôi bất cứ điều gì bạn muốn biết về căn bệnh này."
+    ],
+    "fallback": [
+      "Xin lỗi, tôi không hiểu câu hỏi của bạn. Bạn có thể hỏi lại bằng cách khác được không?",
+      "Tôi chưa tìm thấy thông tin phù hợp với câu hỏi của bạn. Bạn có thể hỏi về: triệu chứng cảm lạnh, cách phòng ngừa, điều trị, hoặc các biến chứng."
+    ],
+    "emergency": [
+      "⚠️ KHẨN CẤP: Nếu bạn đang gặp khó thở nghiêm trọng, đau ngực dai dẳng, lú lẫn hoặc môi xanh tím, hãy gọi cấp cứu 115 NGAY LẬP TỨC!"
+    ]
+  },
+  "metadata": {
+    "created_by": "Cold Information Assistant",
+    "purpose": "Ontology-based knowledge base for Common Cold information",
+    "target_audience": "Vietnamese speakers",
+    "compliance": "Based on WHO and Vietnam Ministry of Health guidelines",
+    "contact_info": {
+      "emergency": "115",
+      "health_ministry_hotline": "19003228"
+    },
+    "sources": [
+      "Medlatec.vn - Bệnh viện Đa khoa MEDLATEC",
+      "VNVC.vn - Hệ thống tiêm chủng VNVC",
+      "Vinmec.com - Bệnh viện Đa khoa Quốc tế Vinmec",
+      "WHO Guidelines on Cold Management",
+      "CDC - Centers for Disease Control and Prevention"
+    ],
+    "medical_disclaimer": "Thông tin này chỉ mang tính chất tham khảo. Luôn tham khảo ý kiến bác sĩ chuyên khoa để được chẩn đoán và điều trị chính xác."
+  }
+}

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đơn thuốc - Healthcare System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .navbar {
+            background: #3498db;
+            padding: 1rem;
+        }
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+        }
+        .nav-link {
+            color: white !important;
+        }
+        .prescription-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+        }
+        .prescription-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .prescription-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .status-pending {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+        .status-processing {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        .status-completed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .status-cancelled {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .medicine-list {
+            margin-top: 1rem;
+        }
+        .medicine-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+        .medicine-info {
+            flex: 1;
+        }
+        .medicine-quantity {
+            font-weight: 500;
+            color: #666;
+        }
+        .prescription-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .filter-section {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+        .search-box {
+            position: relative;
+        }
+        .search-box input {
+            padding-left: 2.5rem;
+        }
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">Healthcare System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">
+                            <i class="bi bi-house-door"></i> Về trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Thông tin cá nhân</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn">Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Quản lý đơn thuốc</h2>
+        </div>
+
+        <!-- Phần lọc và tìm kiếm -->
+        <div class="filter-section">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="search-box">
+                        <i class="bi bi-search"></i>
+                        <input type="text" class="form-control" placeholder="Tìm kiếm đơn thuốc...">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select">
+                        <option value="">Tất cả trạng thái</option>
+                        <option value="pending">Chờ xử lý</option>
+                        <option value="processing">Đang xử lý</option>
+                        <option value="completed">Hoàn thành</option>
+                        <option value="cancelled">Đã hủy</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <input type="date" class="form-control" placeholder="Ngày">
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary w-100">Lọc</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Danh sách đơn thuốc -->
+        <div id="prescriptionList">
+            <!-- Đơn thuốc mẫu 1 -->
+            <div class="prescription-card">
+                <div class="prescription-header">
+                    <div>
+                        <h5 class="mb-1">Đơn thuốc #12345</h5>
+                        <p class="mb-0 text-muted">Bệnh nhân: Nguyễn Văn A</p>
+                    </div>
+                    <span class="prescription-status status-pending">Chờ xử lý</span>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Bác sĩ kê đơn:</strong> BS. Trần Văn B</p>
+                        <p><strong>Ngày kê đơn:</strong> 28/05/2024</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Chẩn đoán:</strong> Cảm cúm thông thường</p>
+                        <p><strong>Ghi chú:</strong> Uống thuốc sau khi ăn</p>
+                    </div>
+                </div>
+                <div class="medicine-list">
+                    <h6>Danh sách thuốc:</h6>
+                    <div class="medicine-item">
+                        <div class="medicine-info">
+                            <strong>Paracetamol 500mg</strong>
+                            <p class="mb-0 text-muted">Thuốc giảm đau, hạ sốt</p>
+                        </div>
+                        <div class="medicine-quantity">
+                            2 viên x 3 lần/ngày
+                        </div>
+                    </div>
+                    <div class="medicine-item">
+                        <div class="medicine-info">
+                            <strong>Amoxicillin 500mg</strong>
+                            <p class="mb-0 text-muted">Kháng sinh</p>
+                        </div>
+                        <div class="medicine-quantity">
+                            1 viên x 2 lần/ngày
+                        </div>
+                    </div>
+                </div>
+                <div class="prescription-actions">
+                    <button class="btn btn-primary">Xác nhận</button>
+                    <button class="btn btn-outline-danger">Hủy đơn</button>
+                </div>
+            </div>
+
+            <!-- Đơn thuốc mẫu 2 -->
+            <div class="prescription-card">
+                <div class="prescription-header">
+                    <div>
+                        <h5 class="mb-1">Đơn thuốc #12346</h5>
+                        <p class="mb-0 text-muted">Bệnh nhân: Lê Thị C</p>
+                    </div>
+                    <span class="prescription-status status-processing">Đang xử lý</span>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Bác sĩ kê đơn:</strong> BS. Phạm Văn D</p>
+                        <p><strong>Ngày kê đơn:</strong> 28/05/2024</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Chẩn đoán:</strong> Viêm họng</p>
+                        <p><strong>Ghi chú:</strong> Uống thuốc trước khi ăn</p>
+                    </div>
+                </div>
+                <div class="medicine-list">
+                    <h6>Danh sách thuốc:</h6>
+                    <div class="medicine-item">
+                        <div class="medicine-info">
+                            <strong>Amoxicillin 500mg</strong>
+                            <p class="mb-0 text-muted">Kháng sinh</p>
+                        </div>
+                        <div class="medicine-quantity">
+                            1 viên x 3 lần/ngày
+                        </div>
+                    </div>
+                    <div class="medicine-item">
+                        <div class="medicine-info">
+                            <strong>Ibuprofen 400mg</strong>
+                            <p class="mb-0 text-muted">Thuốc giảm đau</p>
+                        </div>
+                        <div class="medicine-quantity">
+                            1 viên x 2 lần/ngày
+                        </div>
+                    </div>
+                </div>
+                <div class="prescription-actions">
+                    <button class="btn btn-success">Hoàn thành</button>
+                    <button class="btn btn-outline-danger">Hủy đơn</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Kiểm tra đăng nhập và quyền
+        const user = JSON.parse(localStorage.getItem('user'));
+        const token = localStorage.getItem('access_token');
+        const refreshToken = localStorage.getItem('refresh_token');
+
+        if (!user || !token || user.role !== 'PHARMACIST') {
+            window.location.href = '/login';
+        }
+
+        // Hàm refresh token
+        async function refreshAccessToken() {
+            try {
+                const response = await fetch('http://localhost:8080/api/users/token/refresh/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        refresh: refreshToken
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('access_token', data.access);
+                    return data.access;
+                } else {
+                    throw new Error('Không thể refresh token');
+                }
+            } catch (error) {
+                console.error('Lỗi refresh token:', error);
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+                localStorage.removeItem('user');
+                window.location.href = '/login';
+                return null;
+            }
+        }
+
+        // Hàm lấy danh sách thanh toán
+        async function fetchPayments() {
+            try {
+                let currentToken = token;
+                let response = await fetch('http://localhost:8080/api/payments/', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${currentToken}`
+                    }
+                });
+
+                if (response.status === 401) {
+                    const newToken = await refreshAccessToken();
+                    if (newToken) {
+                        currentToken = newToken;
+                        response = await fetch('http://localhost:8080/api/payments/', {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${currentToken}`
+                            }
+                        });
+                    }
+                }
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.code === 200) {
+                        displayPayments(data.data);
+                    } else {
+                        alert(data.message || 'Có lỗi xảy ra khi lấy danh sách thanh toán');
+                    }
+                } else {
+                    throw new Error('Không thể lấy danh sách thanh toán');
+                }
+            } catch (error) {
+                console.error('Lỗi:', error);
+                alert('Có lỗi xảy ra khi lấy danh sách thanh toán');
+            }
+        }
+
+        // Hàm lấy chi tiết thanh toán
+        async function fetchPaymentDetails(patientId, medicalRecordId) {
+            try {
+                let currentToken = token;
+                let response = await fetch(`http://localhost:8080/api/patients/${patientId}/medical-records/${medicalRecordId}/payment/`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${currentToken}`
+                    }
+                });
+
+                if (response.status === 401) {
+                    const newToken = await refreshAccessToken();
+                    if (newToken) {
+                        currentToken = newToken;
+                        response = await fetch(`http://localhost:8080/api/patients/${patientId}/medical-records/${medicalRecordId}/payment/`, {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${currentToken}`
+                            }
+                        });
+                    }
+                }
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.code === 200) {
+                        return data.data;
+                    } else {
+                        throw new Error(data.message || 'Có lỗi xảy ra khi lấy chi tiết thanh toán');
+                    }
+                } else {
+                    throw new Error('Không thể lấy chi tiết thanh toán');
+                }
+            } catch (error) {
+                console.error('Lỗi:', error);
+                throw error;
+            }
+        }
+
+        // Hàm hiển thị danh sách thanh toán
+        function displayPayments(payments) {
+            const prescriptionList = document.getElementById('prescriptionList');
+            prescriptionList.innerHTML = '';
+
+            payments.forEach(payment => {
+                const card = document.createElement('div');
+                card.className = 'prescription-card';
+                card.innerHTML = `
+                    <div class="prescription-header">
+                        <div>
+                            <h5 class="mb-1">Hóa đơn #${payment.id}</h5>
+                            <p class="mb-0 text-muted">Bệnh nhân ID: ${payment.patient_id}</p>
+                        </div>
+                        <span class="prescription-status status-${payment.payment_status.toLowerCase()}">${getStatusText(payment.payment_status)}</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Mã hồ sơ:</strong> ${payment.medical_record_id}</p>
+                            <p><strong>Ngày thanh toán:</strong> ${formatDate(payment.payment_date)}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Tổng tiền:</strong> ${formatCurrency(payment.total_amount)}</p>
+                            <p><strong>Cập nhật lần cuối:</strong> ${formatDate(payment.updated_at)}</p>
+                        </div>
+                    </div>
+                    <div class="prescription-actions">
+                        <button class="btn btn-primary" onclick="showPaymentDetails(${payment.patient_id}, ${payment.medical_record_id})">Xem chi tiết</button>
+                    </div>
+                `;
+                prescriptionList.appendChild(card);
+            });
+        }
+
+        // Hàm hiển thị chi tiết thanh toán
+        async function showPaymentDetails(patientId, medicalRecordId) {
+            try {
+                const details = await fetchPaymentDetails(patientId, medicalRecordId);
+                const modal = new bootstrap.Modal(document.getElementById('paymentDetailsModal'));
+                
+                document.getElementById('modalPatientName').textContent = details.patient_name;
+                document.getElementById('modalDiagnosis').textContent = details.diagnosis;
+                document.getElementById('modalDoctor').textContent = details.doctor;
+                document.getElementById('modalTotalAmount').textContent = formatCurrency(details.total_amount);
+                
+                const medicinesList = document.getElementById('modalMedicines');
+                medicinesList.innerHTML = '';
+                details.medicines.forEach(medicine => {
+                    const item = document.createElement('div');
+                    item.className = 'medicine-item';
+                    item.innerHTML = `
+                        <div class="medicine-info">
+                            <strong>${medicine.name}</strong>
+                            <p class="mb-0 text-muted">Giá: ${formatCurrency(medicine.price)}</p>
+                        </div>
+                        <div class="medicine-quantity">
+                            Số lượng: ${medicine.quantity}
+                        </div>
+                    `;
+                    medicinesList.appendChild(item);
+                });
+
+                if (details.qr_code_url) {
+                    document.getElementById('modalQRCode').src = details.qr_code_url;
+                    document.getElementById('modalQRCode').style.display = 'block';
+                } else {
+                    document.getElementById('modalQRCode').style.display = 'none';
+                }
+
+                modal.show();
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+        // Hàm chuyển đổi trạng thái
+        function getStatusText(status) {
+            const statusMap = {
+                'PENDING': 'Chờ thanh toán',
+                'COMPLETED': 'Đã thanh toán',
+                'CANCELLED': 'Đã hủy'
+            };
+            return statusMap[status] || status;
+        }
+
+        // Hàm định dạng tiền tệ
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(amount);
+        }
+
+        // Hàm định dạng ngày tháng
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('vi-VN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Xử lý đăng xuất
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+            localStorage.removeItem('user');
+            window.location.href = '/login';
+        });
+
+        // Gọi API khi trang được tải
+        fetchPayments();
+    </script>
+
+    <!-- Modal chi tiết thanh toán -->
+    <div class="modal fade" id="paymentDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chi tiết thanh toán</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <p><strong>Bệnh nhân:</strong> <span id="modalPatientName"></span></p>
+                            <p><strong>Chẩn đoán:</strong> <span id="modalDiagnosis"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Bác sĩ:</strong> <span id="modalDoctor"></span></p>
+                            <p><strong>Tổng tiền:</strong> <span id="modalTotalAmount"></span></p>
+                        </div>
+                    </div>
+                    <h6>Danh sách thuốc:</h6>
+                    <div id="modalMedicines" class="medicine-list"></div>
+                    <div class="text-center mt-3">
+                        <img id="modalQRCode" src="" alt="QR Code" style="max-width: 200px; display: none;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch khám - Healthcare System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .navbar {
+            background: #3498db;
+            padding: 1rem;
+        }
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+        }
+        .nav-link {
+            color: white !important;
+        }
+        .appointment-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+        .status-waitlisted {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+        .status-confirmed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .status-cancelled {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .modal-header {
+            background: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">Healthcare System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Thông tin cá nhân</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn">Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Lịch khám</h2>
+            <button class="btn btn-primary" id="bookAppointmentBtn" style="display: none;">
+                <i class="bi bi-plus-circle"></i> Đặt lịch khám
+            </button>
+        </div>
+
+        <div id="appointmentsList">
+            <!-- Danh sách lịch khám sẽ được hiển thị ở đây -->
+        </div>
+    </div>
+
+    <!-- Modal đặt lịch khám -->
+    <div class="modal fade" id="bookAppointmentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Đặt lịch khám</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="appointmentForm">
+                        <div class="mb-3">
+                            <label class="form-label">Bác sĩ</label>
+                            <select class="form-select" id="doctorSelect" required>
+                                <option value="">Chọn bác sĩ</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ngày khám</label>
+                            <input type="datetime-local" class="form-control" id="appointmentDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ghi chú</label>
+                            <textarea class="form-control" id="notes" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="submitAppointment">Đặt lịch</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Kiểm tra đăng nhập
+        const user = JSON.parse(localStorage.getItem('user'));
+        const token = localStorage.getItem('access_token');
+        const refreshToken = localStorage.getItem('refresh_token');
+        
+        if (!user || !token) {
+            window.location.href = '/login';
+        }
+
+        // Hiển thị nút đặt lịch nếu là bệnh nhân
+        if (user.role === 'PATIENT') {
+            document.getElementById('bookAppointmentBtn').style.display = 'block';
+        }
+
+        // Hàm refresh token
+        async function refreshAccessToken() {
+            try {
+                const response = await fetch('http://localhost:8080/api/users/token/refresh/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        refresh: refreshToken
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('access_token', data.access);
+                    return data.access;
+                } else {
+                    throw new Error('Không thể refresh token');
+                }
+            } catch (error) {
+                console.error('Lỗi refresh token:', error);
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+                localStorage.removeItem('user');
+                window.location.href = '/login';
+                return null;
+            }
+        }
+
+        // Hàm lấy danh sách bác sĩ
+        async function fetchDoctors() {
+            try {
+                let currentToken = token;
+                let response = await fetch('http://localhost:8080/api/users/get_users_by_role/?role=DOCTOR', {
+                    headers: {
+                        'Authorization': `Bearer ${currentToken}`
+                    }
+                });
+
+                if (response.status === 401) {
+                    const newToken = await refreshAccessToken();
+                    if (newToken) {
+                        currentToken = newToken;
+                        response = await fetch('http://localhost:8080/api/users/get_users_by_role/?role=DOCTOR', {
+                            headers: {
+                                'Authorization': `Bearer ${currentToken}`
+                            }
+                        });
+                    }
+                }
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const doctors = data.users || [];
+                    const doctorSelect = document.getElementById('doctorSelect');
+                    doctorSelect.innerHTML = '<option value="">Chọn bác sĩ</option>';
+                    
+                    doctors.forEach(doctor => {
+                        const option = document.createElement('option');
+                        option.value = doctor.id;
+                        option.textContent = `${doctor.username} - ${doctor.email}`;
+                        doctorSelect.appendChild(option);
+                    });
+                } else {
+                    alert('Không thể lấy danh sách bác sĩ. Vui lòng thử lại sau.');
+                }
+            } catch (error) {
+                console.error('Lỗi:', error);
+                alert('Có lỗi xảy ra khi lấy danh sách bác sĩ.');
+            }
+        }
+
+        // Hàm lấy danh sách lịch khám
+        async function fetchAppointments() {
+            try {
+                let currentToken = token;
+                let url = 'http://localhost:8080/api/appointments/';
+                
+                // Nếu là bệnh nhân, thêm patient_id vào query params
+                if (user.role === 'PATIENT') {
+                    url += `?patient_id=${user.id}`;
+                }
+
+                let response = await fetch(url, {
+                    headers: {
+                        'Authorization': `Bearer ${currentToken}`
+                    }
+                });
+
+                if (response.status === 401) {
+                    const newToken = await refreshAccessToken();
+                    if (newToken) {
+                        currentToken = newToken;
+                        response = await fetch(url, {
+                            headers: {
+                                'Authorization': `Bearer ${currentToken}`
+                            }
+                        });
+                    }
+                }
+
+                if (response.ok) {
+                    const data = await response.json();
+                    displayAppointments(data.data);
+                } else {
+                    alert('Không thể lấy danh sách lịch khám. Vui lòng thử lại sau.');
+                }
+            } catch (error) {
+                console.error('Lỗi:', error);
+                alert('Có lỗi xảy ra khi lấy danh sách lịch khám.');
+            }
+        }
+
+        // Hàm hiển thị danh sách lịch khám
+        function displayAppointments(appointments) {
+            const appointmentsList = document.getElementById('appointmentsList');
+            appointmentsList.innerHTML = '';
+
+            appointments.forEach(appointment => {
+                const appointmentDate = new Date(appointment.appointment_date);
+                const statusClass = {
+                    'waitlisted': 'status-waitlisted',
+                    'confirmed': 'status-confirmed',
+                    'cancelled': 'status-cancelled'
+                }[appointment.status];
+
+                const appointmentCard = document.createElement('div');
+                appointmentCard.className = 'appointment-card';
+                
+                let actionButtons = '';
+                // Nếu là bác sĩ và lịch khám chưa được xác nhận hoặc hủy, hiển thị nút hành động
+                if (user.role === 'DOCTOR' && appointment.status === 'waitlisted') {
+                    actionButtons = `
+                        <div class="mt-2">
+                            <button class="btn btn-success btn-sm me-2" onclick="updateAppointmentStatus(${appointment.id}, 'confirmed')">
+                                <i class="bi bi-check-circle"></i> Chấp nhận
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="updateAppointmentStatus(${appointment.id}, 'cancelled')">
+                                <i class="bi bi-x-circle"></i> Hủy bỏ
+                            </button>
+                        </div>
+                    `;
+                }
+
+                appointmentCard.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="flex-grow-1">
+                            <h5>Lịch khám #${appointment.id}</h5>
+                            <p class="mb-1">Ngày: ${appointmentDate.toLocaleDateString('vi-VN')}</p>
+                            <p class="mb-1">Giờ: ${appointmentDate.toLocaleTimeString('vi-VN')}</p>
+                            <p class="mb-1">Ghi chú: ${appointment.notes || 'Không có'}</p>
+                            ${actionButtons}
+                        </div>
+                        <span class="status-badge ${statusClass}">${appointment.status}</span>
+                    </div>
+                `;
+                appointmentsList.appendChild(appointmentCard);
+            });
+        }
+
+        // Xử lý đặt lịch khám
+        document.getElementById('bookAppointmentBtn').addEventListener('click', () => {
+            const modal = new bootstrap.Modal(document.getElementById('bookAppointmentModal'));
+            modal.show();
+            // Lấy danh sách bác sĩ khi mở modal
+            fetchDoctors();
+        });
+
+        // Xử lý submit form đặt lịch
+        document.getElementById('submitAppointment').addEventListener('click', async () => {
+            const doctorId = document.getElementById('doctorSelect').value;
+            const appointmentDate = document.getElementById('appointmentDate').value;
+            const notes = document.getElementById('notes').value;
+
+            if (!doctorId || !appointmentDate) {
+                alert('Vui lòng điền đầy đủ thông tin');
+                return;
+            }
+
+            try {
+                let currentToken = token;
+                let response = await fetch('http://localhost:8080/api/appointments/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${currentToken}`
+                    },
+                    body: JSON.stringify({
+                        patient_id: user.id,
+                        doctor_id: doctorId,
+                        appointment_date: appointmentDate,
+                        notes: notes
+                    })
+                });
+
+                if (response.status === 401) {
+                    const newToken = await refreshAccessToken();
+                    if (newToken) {
+                        currentToken = newToken;
+                        response = await fetch('http://localhost:8080/api/appointments/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${currentToken}`
+                            },
+                            body: JSON.stringify({
+                                patient_id: user.id,
+                                doctor_id: doctorId,
+                                appointment_date: appointmentDate,
+                                notes: notes
+                            })
+                        });
+                    }
+                }
+
+                if (response.ok) {
+                    alert('Đặt lịch khám thành công!');
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('bookAppointmentModal'));
+                    modal.hide();
+                    fetchAppointments();
+                } else {
+                    alert('Không thể đặt lịch khám. Vui lòng thử lại sau.');
+                }
+            } catch (error) {
+                console.error('Lỗi:', error);
+                alert('Có lỗi xảy ra khi đặt lịch khám.');
+            }
+        });
+
+        // Hàm cập nhật trạng thái lịch khám
+        async function updateAppointmentStatus(appointmentId, status) {
+            if (!confirm(`Bạn có chắc chắn muốn ${status === 'confirmed' ? 'chấp nhận' : 'hủy bỏ'} lịch khám này?`)) {
+                return;
+            }
+
+            try {
+                let currentToken = token;
+                let response = await fetch(`http://localhost:8080/api/appointments/${appointmentId}/`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${currentToken}`
+                    },
+                    body: JSON.stringify({
+                        status: status
+                    })
+                });
+
+                if (response.status === 401) {
+                    const newToken = await refreshAccessToken();
+                    if (newToken) {
+                        currentToken = newToken;
+                        response = await fetch(`http://localhost:8080/api/appointments/${appointmentId}/`, {
+                            method: 'PATCH',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${currentToken}`
+                            },
+                            body: JSON.stringify({
+                                status: status
+                            })
+                        });
+                    }
+                }
+
+                if (response.ok) {
+                    alert(`${status === 'confirmed' ? 'Chấp nhận' : 'Hủy bỏ'} lịch khám thành công!`);
+                    fetchAppointments(); // Reload danh sách lịch khám
+                } else {
+                    alert('Không thể cập nhật trạng thái lịch khám. Vui lòng thử lại sau.');
+                }
+            } catch (error) {
+                console.error('Lỗi:', error);
+                alert('Có lỗi xảy ra khi cập nhật trạng thái lịch khám.');
+            }
+        }
+
+        // Đặt hàm ở global scope để có thể gọi từ onclick
+        window.updateAppointmentStatus = updateAppointmentStatus;
+
+        // Xử lý đăng xuất
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+            localStorage.removeItem('user');
+            window.location.href = '/login';
+        });
+
+        // Gọi hàm lấy danh sách lịch khám khi trang được tải
+        fetchAppointments();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

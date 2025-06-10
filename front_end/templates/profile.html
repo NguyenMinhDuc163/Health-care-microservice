@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin cá nhân - Healthcare System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+            min-height: 100vh;
+        }
+        .navbar {
+            background: #3498db;
+            padding: 1rem;
+        }
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+        }
+        .nav-link {
+            color: white !important;
+        }
+        .profile-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .profile-info {
+            margin-bottom: 1.5rem;
+        }
+        .profile-info label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .btn-back {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .btn-back:hover {
+            background: #2980b9;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">Healthcare System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">
+                            <i class="bi bi-house-door"></i> Về trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Thông tin cá nhân</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn">Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="profile-container">
+            <div class="profile-header">
+                <h2>Thông tin cá nhân</h2>
+            </div>
+            <div id="userInfo">
+                <div class="profile-info">
+                    <label>Email:</label>
+                    <p id="userEmail"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Tên đăng nhập:</label>
+                    <p id="userUsername"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Vai trò:</label>
+                    <p id="userRole"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Số điện thoại:</label>
+                    <p id="userPhone"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Trạng thái:</label>
+                    <p id="userStatus"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Ngày sinh:</label>
+                    <p id="userDob"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Địa chỉ:</label>
+                    <p id="userAddress"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Thành phố:</label>
+                    <p id="userCity"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Tỉnh/Thành:</label>
+                    <p id="userState"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Quốc gia:</label>
+                    <p id="userCountry"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Mã bưu điện:</label>
+                    <p id="userPostalCode"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Chuyên môn:</label>
+                    <p id="userSpecialization"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Số giấy phép:</label>
+                    <p id="userLicenseNumber"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Nhà bảo hiểm:</label>
+                    <p id="userInsuranceProvider"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Số bảo hiểm:</label>
+                    <p id="userInsuranceNumber"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Ngày tạo:</label>
+                    <p id="userCreatedAt"></p>
+                </div>
+                <div class="profile-info">
+                    <label>Ngày cập nhật:</label>
+                    <p id="userUpdatedAt"></p>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="/home" class="btn btn-back">Quay lại trang chủ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Kiểm tra đăng nhập
+        const user = JSON.parse(localStorage.getItem('user'));
+        const token = localStorage.getItem('access_token');
+        const refreshToken = localStorage.getItem('refresh_token');
+        
+        if (!user || !token) {
+            window.location.href = '/login';
+        }
+
+        // Xử lý đăng xuất
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+            localStorage.removeItem('user');
+            window.location.href = '/login';
+        });
+
+        // Hàm refresh token
+        async function refreshAccessToken() {
+            try {
+                const response = await fetch('http://localhost:8080/api/users/token/refresh/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        refresh: refreshToken
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('access_token', data.access);
+                    return data.access;
+                } else {
+                    throw new Error('Không thể refresh token');
+                }
+            } catch (error) {
+                console.error('Lỗi refresh token:', error);
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+                localStorage.removeItem('user');
+                window.location.href = '/login';
+                return null;
+            }
+        }
+
+        // Hàm chuyển đổi role sang tiếng Việt
+        function convertRoleToVietnamese(role) {
+            const roleMap = {
+                'PATIENT': 'Bệnh nhân',
+                'DOCTOR': 'Bác sĩ',
+                'NURSE': 'Y tá',
+                'ADMIN': 'Quản trị viên',
+                'PHARMACIST': 'Dược sĩ',
+                'INSURANCE': 'Nhà cung cấp bảo hiểm',
+                'LAB_TECHNICIAN': 'Kỹ thuật viên phòng xét nghiệm'
+            };
+            return roleMap[role] || role;
+        }
+
+        // Hàm kiểm tra quyền
+        function checkPermission(allowedRoles) {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (!user || !user.role) return false;
+            return allowedRoles.includes(user.role);
+        }
+
+        // Lấy thông tin người dùng
+        async function fetchUserInfo() {
+            try {
+                let currentToken = token;
+                let response = await fetch('http://localhost:8080/api/users/me/', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${currentToken}`
+                    }
+                });
+
+                // Nếu token hết hạn, thử refresh token
+                if (response.status === 401) {
+                    const newToken = await refreshAccessToken();
+                    if (newToken) {
+                        currentToken = newToken;
+                        response = await fetch('http://localhost:8080/api/users/me/', {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${currentToken}`
+                            }
+                        });
+                    }
+                }
+
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Lưu thông tin người dùng vào localStorage
+                    localStorage.setItem('user', JSON.stringify({
+                        ...data,
+                        role: data.role
+                    }));
+                    
+                    // Hiển thị thông tin cơ bản
+                    document.getElementById('userEmail').textContent = data.email || 'Chưa cập nhật';
+                    document.getElementById('userUsername').textContent = data.username || 'Chưa cập nhật';
+                    document.getElementById('userRole').textContent = convertRoleToVietnamese(data.role) || 'Chưa cập nhật';
+                    document.getElementById('userPhone').textContent = data.phone || 'Chưa cập nhật';
+                    document.getElementById('userStatus').textContent = data.is_active ? 'Đang hoạt động' : 'Không hoạt động';
+                    
+                    // Hiển thị thông tin profile
+                    if (data.profile) {
+                        document.getElementById('userDob').textContent = data.profile.date_of_birth || 'Chưa cập nhật';
+                        document.getElementById('userAddress').textContent = data.profile.address || 'Chưa cập nhật';
+                        document.getElementById('userCity').textContent = data.profile.city || 'Chưa cập nhật';
+                        document.getElementById('userState').textContent = data.profile.state || 'Chưa cập nhật';
+                        document.getElementById('userCountry').textContent = data.profile.country || 'Chưa cập nhật';
+                        document.getElementById('userPostalCode').textContent = data.profile.postal_code || 'Chưa cập nhật';
+                        document.getElementById('userSpecialization').textContent = data.profile.specialization || 'Chưa cập nhật';
+                        document.getElementById('userLicenseNumber').textContent = data.profile.license_number || 'Chưa cập nhật';
+                        document.getElementById('userInsuranceProvider').textContent = data.profile.insurance_provider || 'Chưa cập nhật';
+                        document.getElementById('userInsuranceNumber').textContent = data.profile.insurance_number || 'Chưa cập nhật';
+                    }
+                    
+                    // Hiển thị thông tin thời gian
+                    document.getElementById('userCreatedAt').textContent = new Date(data.created_at).toLocaleString('vi-VN') || 'Chưa cập nhật';
+                    document.getElementById('userUpdatedAt').textContent = new Date(data.updated_at).toLocaleString('vi-VN') || 'Chưa cập nhật';
+                } else {
+                    alert('Không thể lấy thông tin người dùng. Vui lòng thử lại sau.');
+                }
+            } catch (error) {
+                console.error('Lỗi:', error);
+                alert('Có lỗi xảy ra khi lấy thông tin người dùng.');
+            }
+        }
+
+        // Gọi hàm lấy thông tin khi trang được tải
+        fetchUserInfo();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

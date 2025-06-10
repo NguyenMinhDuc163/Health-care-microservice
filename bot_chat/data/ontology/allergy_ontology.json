@@ -1,0 +1,236 @@
+{
+  "ontology": {
+    "version": "1.0",
+    "last_updated": "2024-03-20",
+    "language": "vi",
+    "classes": {
+      "Disease": {
+        "properties": {
+          "name": "Dị ứng",
+          "scientific_name": "Allergy",
+          "type": "Immune System Disorder",
+          "mechanism": "String",
+          "severity_level": ["Mild", "Moderate", "Severe", "Anaphylaxis"]
+        }
+      },
+      "Allergen": {
+        "properties": {
+          "name": "String",
+          "category": "String",
+          "type": ["Food", "Environmental", "Medication", "Chemical", "Insect"],
+          "description": "String",
+          "examples": ["String"]
+        }
+      },
+      "Symptom": {
+        "properties": {
+          "name": "String",
+          "system": ["Respiratory", "Ocular", "Digestive", "Skin", "Systemic"],
+          "severity": ["Mild", "Moderate", "Severe"],
+          "description": "String",
+          "onset": "String"
+        }
+      },
+      "Diagnosis": {
+        "properties": {
+          "name": "String",
+          "type": ["Clinical", "Laboratory", "Skin Test", "Blood Test"],
+          "description": "String",
+          "accuracy": ["High", "Medium", "Low"]
+        }
+      },
+      "Treatment": {
+        "properties": {
+          "name": "String",
+          "type": ["Medication", "Immunotherapy", "Avoidance", "Emergency"],
+          "effectiveness": ["High", "Medium", "Low"],
+          "side_effects": ["String"],
+          "contraindications": ["String"]
+        }
+      },
+      "Medication": {
+        "properties": {
+          "name": "String",
+          "type": ["Antihistamine", "Decongestant", "Corticosteroid", "Mast Cell Stabilizer"],
+          "forms": ["Oral", "Injection", "Nasal Spray", "Eye Drops", "Topical"],
+          "action": "String",
+          "examples": ["String"]
+        }
+      },
+      "Prevention": {
+        "properties": {
+          "name": "String",
+          "type": ["Environmental", "Lifestyle", "Medical"],
+          "effectiveness": ["High", "Medium", "Low"],
+          "description": "String"
+        }
+      }
+    },
+    "relationships": {
+      "Disease_triggered_by": "Disease -> triggered_by -> Allergen",
+      "Disease_has_symptom": "Disease -> has_symptom -> Symptom",
+      "Disease_diagnosed_by": "Disease -> diagnosed_by -> Diagnosis",
+      "Disease_treated_by": "Disease -> treated_by -> Treatment",
+      "Treatment_includes_medication": "Treatment -> includes_medication -> Medication",
+      "Disease_prevented_by": "Disease -> prevented_by -> Prevention",
+      "Allergen_causes_symptom": "Allergen -> causes_symptom -> Symptom"
+    },
+    "instances": {
+      "diseases": [
+        {
+          "id": "allergy",
+          "name": "Dị ứng",
+          "scientific_name": "Allergy",
+          "type": "Immune System Disorder",
+          "mechanism": "Phản ứng của hệ thống miễn dịch đối với các chất thường vô hại với hầu hết mọi người (dị nguyên)",
+          "severity_level": ["Nhẹ", "Trung bình", "Nặng", "Sốc phản vệ"]
+        }
+      ],
+      "allergens": [
+        {
+          "id": "food_allergens",
+          "name": "Dị ứng thực phẩm",
+          "category": "Thực phẩm",
+          "type": "Food",
+          "examples": ["Đậu phộng", "Sữa", "Trứng", "Hải sản"],
+          "description": "Phản ứng mạnh mẽ của hệ miễn dịch với các thành phần nhất định trong thực phẩm"
+        },
+        {
+          "id": "environmental_allergens",
+          "name": "Dị ứng môi trường",
+          "category": "Môi trường và không khí",
+          "type": "Environmental",
+          "examples": ["Phấn hoa", "Mạt bụi nhà", "Nấm mốc", "Lông động vật"],
+          "description": "Các chất trong không khí hít vào, có thể gây dị ứng lâu năm hoặc theo mùa"
+        }
+      ],
+      "symptoms": [
+        {
+          "id": "respiratory_symptoms",
+          "name": "Triệu chứng hô hấp",
+          "system": "Respiratory",
+          "symptoms": ["Tắc nghẽn mũi", "Ngứa mũi và họng", "Chảy nước mũi", "Hắt hơi", "Khó thở"],
+          "severity": "Moderate"
+        },
+        {
+          "id": "skin_symptoms",
+          "name": "Triệu chứng da",
+          "system": "Skin",
+          "symptoms": ["Phát ban", "Mề đay", "Ngứa da", "Nổi mụn nước"],
+          "severity": "Mild"
+        }
+      ],
+      "diagnoses": [
+        {
+          "id": "skin_prick_test",
+          "name": "Xét nghiệm da",
+          "type": "Skin Test",
+          "description": "Chích một lượng nhỏ các chất gây dị ứng nghi ngờ vào da và quan sát phản ứng",
+          "accuracy": "High"
+        },
+        {
+          "id": "blood_test",
+          "name": "Xét nghiệm máu",
+          "type": "Blood Test",
+          "description": "Đo lường lượng kháng thể IgE đặc hiệu với từng dị nguyên trong máu",
+          "accuracy": "High"
+        }
+      ],
+      "treatments": [
+        {
+          "id": "avoidance",
+          "name": "Tránh tiếp xúc",
+          "type": "Avoidance",
+          "effectiveness": "High",
+          "description": "Xác định và tránh xa các chất gây dị ứng"
+        },
+        {
+          "id": "immunotherapy",
+          "name": "Liệu pháp miễn dịch",
+          "type": "Immunotherapy",
+          "effectiveness": "High",
+          "description": "Tiêm liều tăng dần của dị nguyên để cơ thể quen dần"
+        }
+      ],
+      "medications": [
+        {
+          "id": "antihistamine",
+          "name": "Thuốc kháng histamine",
+          "type": "Antihistamine",
+          "forms": ["Viên uống", "Tiêm", "Xịt mũi", "Thuốc nhỏ mắt"],
+          "action": "Giảm các triệu chứng như ngứa, hắt hơi, chảy nước mũi"
+        },
+        {
+          "id": "corticosteroid",
+          "name": "Corticosteroid",
+          "type": "Corticosteroid",
+          "forms": ["Xịt mũi", "Hít", "Uống", "Tiêm", "Kem bôi da"],
+          "action": "Giảm viêm"
+        }
+      ],
+      "preventions": [
+        {
+          "id": "environmental_control",
+          "name": "Kiểm soát môi trường",
+          "type": "Environmental",
+          "effectiveness": "High",
+          "description": "Giữ nhà cửa sạch sẽ, sử dụng máy lọc không khí"
+        },
+        {
+          "id": "lifestyle_changes",
+          "name": "Thay đổi lối sống",
+          "type": "Lifestyle",
+          "effectiveness": "Medium",
+          "description": "Hạn chế tiếp xúc với dị nguyên, đọc kỹ nhãn thực phẩm"
+        }
+      ]
+    }
+  },
+  "qa_pairs": {
+    "categories": {
+      "thong_tin_chung": {
+        "title": "Thông tin chung về dị ứng",
+        "intent": ["dị ứng là gì", "thông tin dị ứng", "allergy"],
+        "data": [
+          {
+            "question": "Dị ứng là gì?",
+            "answer": "Dị ứng là một phản ứng của hệ thống miễn dịch đối với các chất thường vô hại với hầu hết mọi người (dị nguyên). Khi một người bị dị ứng tiếp xúc với dị nguyên, hệ thống miễn dịch của họ phản ứng lại như thể đó là một mối đe dọa.",
+            "keywords": ["dị ứng", "hệ miễn dịch", "dị nguyên", "phản ứng"],
+            "related_instances": ["allergy"]
+          }
+        ]
+      }
+    }
+  },
+  "chatbot_responses": {
+    "greetings": [
+      "Xin chào! Tôi là trợ lý ảo về bệnh dị ứng. Tôi có thể giúp bạn tìm hiểu về dị ứng, triệu chứng, cách phòng ngừa và điều trị. Bạn cần hỗ trợ thông tin gì?",
+      "Chào bạn! Tôi sẵn sàng hỗ trợ bạn các thông tin về bệnh dị ứng. Hãy hỏi tôi bất cứ điều gì bạn muốn biết về căn bệnh này."
+    ],
+    "fallback": [
+      "Xin lỗi, tôi không hiểu câu hỏi của bạn. Bạn có thể hỏi lại bằng cách khác được không?",
+      "Tôi chưa tìm thấy thông tin phù hợp với câu hỏi của bạn. Bạn có thể hỏi về: triệu chứng dị ứng, cách phòng ngừa, điều trị, hoặc các loại dị ứng phổ biến."
+    ],
+    "emergency": [
+      "⚠️ KHẨN CẤP: Nếu bạn đang gặp khó thở nghiêm trọng, sưng họng, chóng mặt nghiêm trọng hoặc các dấu hiệu sốc phản vệ, hãy gọi cấp cứu 115 NGAY LẬP TỨC!"
+    ]
+  },
+  "metadata": {
+    "created_by": "Allergy Information Assistant",
+    "purpose": "Ontology-based knowledge base for Allergy information",
+    "target_audience": "Vietnamese speakers",
+    "compliance": "Based on WHO and Vietnam Ministry of Health guidelines",
+    "contact_info": {
+      "emergency": "115",
+      "health_ministry_hotline": "19003228"
+    },
+    "sources": [
+      "Medlatec.vn - Bệnh viện Đa khoa MEDLATEC",
+      "VNVC.vn - Hệ thống tiêm chủng VNVC",
+      "Vinmec.com - Bệnh viện Đa khoa Quốc tế Vinmec",
+      "WHO Guidelines on Allergy Management",
+      "CDC - Centers for Disease Control and Prevention"
+    ],
+    "medical_disclaimer": "Thông tin này chỉ mang tính chất tham khảo. Luôn tham khảo ý kiến bác sĩ chuyên khoa để được chẩn đoán và điều trị chính xác."
+  }
+}

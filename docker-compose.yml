@@ -1,0 +1,163 @@
+version: '3.8'
+
+services:
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SECRET_KEY=django-insecure-gateway-key
+      - AUTH_SERVICE_URL=http://auth-service:8000
+      - PATIENT_SERVICE_URL=http://patient-service:8002
+      - CHATBOT_SERVICE_URL=http://chatbot-service:8009
+      - BOOKING_SERVICE_URL=http://booking-service:8003
+      - PHARMACY_SERVICE_URL=http://pharmacy-service:8004
+      - CLINICAL_SERVICE_URL=http://clinical-service:8005
+      - PAYMENT_SERVICE_URL=http://payment-service:8006
+    depends_on:
+      - auth-service
+      - patient-service
+      - chatbot-service
+      - booking-service
+      - pharmacy-service
+      - clinical-service
+    networks:
+      - health-network
+
+  payment-service:
+    build:
+      context: ./payment_service
+      dockerfile: Dockerfile
+    ports:
+      - "8006:8006"
+    environment:
+      - DB_NAME=payment_db
+      - DB_USER=postgres
+      - DB_PASSWORD=NguyenDuc@163
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - GATEWAY_URL=http://gateway:8080
+    depends_on:
+      - postgres
+    networks:
+      - health-network
+
+  auth-service:
+    build:
+      context: ./auth_service
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8000"
+    environment:
+      - SECRET_KEY=gsljgsdgiusdfgsd#5sdfsdlkf
+      - DB_NAME=auth_db
+      - DB_USER=postgres
+      - DB_PASSWORD=NguyenDuc@163
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - JWT_SECRET_KEY=your-jwt-secret-key-here
+    depends_on:
+      - postgres
+    networks:
+      - health-network
+
+  patient-service:
+    build:
+      context: ./patient_service
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    environment:
+      - DB_NAME=patient_db
+      - DB_USER=postgres
+      - DB_PASSWORD=NguyenDuc@163
+      - DB_HOST=postgres
+      - DB_PORT=5432
+    depends_on:
+      - postgres
+    networks:
+      - health-network
+
+  chatbot-service:
+    build:
+      context: ./bot_chat
+      dockerfile: Dockerfile
+    ports:
+      - "8009:8009"
+    networks:
+      - health-network
+
+  booking-service:
+    build:
+      context: ./booking_service
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    environment:
+      - DB_NAME=booking_db
+      - DB_USER=postgres
+      - DB_PASSWORD=NguyenDuc@163
+      - DB_HOST=postgres
+      - DB_PORT=5432
+    depends_on:
+      - postgres
+    networks:
+      - health-network
+
+  pharmacy-service:
+    build:
+      context: ./pharmacy_service
+      dockerfile: Dockerfile
+    ports:
+      - "8004:8004"
+    environment:
+      - DB_NAME=pharmacy_db
+      - DB_USER=postgres
+      - DB_PASSWORD=NguyenDuc@163
+      - DB_HOST=postgres
+      - DB_PORT=5432
+    depends_on:
+      - postgres
+    networks:
+      - health-network
+
+  clinical-service:
+    build:
+      context: ./clinical_service
+      dockerfile: Dockerfile
+    ports:
+      - "8005:8005"
+    environment:
+      - DB_NAME=clinical_db
+      - DB_USER=postgres
+      - DB_PASSWORD=NguyenDuc@163
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - GATEWAY_URL=http://gateway:8080
+    depends_on:
+      - postgres
+    networks:
+      - health-network
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=booking_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=NguyenDuc@163
+      - POSTGRES_MULTIPLE_DATABASES=booking_db,auth_db,patient_db,pharmacy_db,clinical_db,payment_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - health-network
+
+networks:
+  health-network:
+    driver: bridge
+
+volumes:
+  postgres_data: 

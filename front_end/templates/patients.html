@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý bệnh nhân - Healthcare System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+            min-height: 100vh;
+        }
+        .navbar {
+            background: #3498db;
+            padding: 1rem;
+        }
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+        }
+        .nav-link {
+            color: white !important;
+        }
+        .patients-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            margin: 2rem auto;
+        }
+        .table th {
+            background-color: #3498db;
+            color: white;
+        }
+        .btn-action {
+            margin: 0 2px;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 8px 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .btn-info {
+            background: linear-gradient(45deg, #2196F3, #03A9F4);
+            border: none;
+        }
+        .btn-info:hover {
+            background: linear-gradient(45deg, #1976D2, #0288D1);
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #4CAF50, #8BC34A);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #388E3C, #689F38);
+        }
+        .btn-action i {
+            font-size: 1.1rem;
+            margin-right: 4px;
+        }
+        .search-box {
+            margin-bottom: 1rem;
+        }
+        .pagination {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">Healthcare System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">
+                            <i class="bi bi-house-door"></i> Về trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Thông tin cá nhân</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn">Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="patients-container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Quản lý bệnh nhân</h2>
+                <button class="btn btn-primary" id="addPatientBtn">
+                    <i class="bi bi-plus-circle"></i> Thêm bệnh nhân
+                </button>
+            </div>
+
+            <div class="search-box">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Tìm kiếm bệnh nhân...">
+                    <button class="btn btn-outline-secondary" type="button" id="searchBtn">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Họ và tên</th>
+                            <th>Ngày sinh</th>
+                            <th>Giới tính</th>
+                            <th>Số điện thoại</th>
+                            <th>Email</th>
+                            <th>Nhóm máu</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="patientsTableBody">
+                        <!-- Dữ liệu sẽ được thêm vào đây -->
+                    </tbody>
+                </table>
+            </div>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center" id="pagination">
+                    <!-- Phân trang sẽ được thêm vào đây -->
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Modal Chi tiết bệnh nhân -->
+    <div class="modal fade" id="patientDetailModal" tabindex="-1" aria-labelledby="patientDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="patientDetailModalLabel">Chi tiết bệnh nhân</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>ID:</strong> <span id="detailId"></span></p>
+                            <p><strong>Họ và tên:</strong> <span id="detailFullName"></span></p>
+                            <p><strong>Ngày sinh:</strong> <span id="detailDob"></span></p>
+                            <p><strong>Giới tính:</strong> <span id="detailGender"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Số điện thoại:</strong> <span id="detailPhone"></span></p>
+                            <p><strong>Email:</strong> <span id="detailEmail"></span></p>
+                            <p><strong>Nhóm máu:</strong> <span id="detailBloodType"></span></p>
+                            <p><strong>Trạng thái:</strong> <span id="detailStatus"></span></p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <h6>Lịch sử khám bệnh</h6>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Ngày khám</th>
+                                            <th>Chẩn đoán</th>
+                                            <th>Bác sĩ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="medicalHistoryBody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="prescribeBtn">Kê đơn thuốc</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Kiểm tra đăng nhập và quyền
+        const user = JSON.parse(localStorage.getItem('user'));
+        const token = localStorage.getItem('access_token');
+        const refreshToken = localStorage.getItem('refresh_token');
+        
+        // Biến lưu danh sách bệnh nhân
+        let patients = [];
+        
+        if (!user || !token) {
+            window.location.href = '/login';
+        }
+
+        // Hàm kiểm tra quyền
+        function checkPermission(allowedRoles) {
+            if (!user || !user.role) return false;
+            return allowedRoles.includes(user.role);
+        }
+
+        // Kiểm tra quyền truy cập
+        if (!checkPermission(['DOCTOR', 'NURSE', 'ADMIN'])) {
+            alert('Bạn không có quyền truy cập trang này');
+            window.location.href = '/home';
+        }
+
+        // Hàm refresh token
+        async function refreshAccessToken() {
+            try {
+                const response = await fetch('http://localhost:8080/api/users/token/refresh/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        refresh: refreshToken
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('access_token', data.access);
+                    return data.access;
+                } else {
+                    throw new Error('Không thể refresh token');
+                }
+            } catch (error) {
+                console.error('Lỗi refresh token:', error);
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+                localStorage.removeItem('user');
+                window.location.href = '/login';
+                return null;
+            }
+        }
+
+        // Hàm chuyển đổi giới tính
+        function convertGender(gender) {
+            return gender === 'M' ? 'Nam' : gender === 'F' ? 'Nữ' : 'Khác';
+        }
+
+        // Hàm lấy danh sách bệnh nhân
+        async function fetchPatients(page = 1) {
+            try {
+                let currentToken = token;
+                let response = await fetch(`http://localhost:8080/api/patients/?page=${page}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${currentToken}`
+                    }
+                });
+
+                if (response.status === 401) {
+                    const newToken = await refreshAccessToken();
+                    if (newToken) {
+                        currentToken = newToken;
+                        response = await fetch(`http://localhost:8080/api/patients/?page=${page}`, {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${currentToken}`
+                            }
+                        });
+                    }
+                }
+
+                if (response.ok) {
+                    const data = await response.json();
+                    // Lưu danh sách bệnh nhân vào biến
+                    patients = data.data;
+                    displayPatients(data.data);
+                    updatePagination(data.pagination);
+                } else {
+                    alert('Không thể lấy danh sách bệnh nhân. Vui lòng thử lại sau.');
+                }
+            } catch (error) {
+                console.error('Lỗi:', error);
+                alert('Có lỗi xảy ra khi lấy danh sách bệnh nhân.');
+            }
+        }
+
+        // Hàm hiển thị danh sách bệnh nhân
+        function displayPatients(patients) {
+            const tbody = document.getElementById('patientsTableBody');
+            tbody.innerHTML = '';
+
+            patients.forEach(patient => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${patient.id}</td>
+                    <td>${patient.full_name}</td>
+                    <td>${new Date(patient.date_of_birth).toLocaleDateString('vi-VN')}</td>
+                    <td>${convertGender(patient.gender)}</td>
+                    <td>${patient.phone_number}</td>
+                    <td>${patient.email}</td>
+                    <td>${patient.blood_type}</td>
+                    <td>
+                        <span class="badge ${patient.is_active ? 'bg-success' : 'bg-danger'}">
+                            ${patient.is_active ? 'Đang hoạt động' : 'Không hoạt động'}
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-info btn-action" onclick="viewPatient(${patient.id})">
+                            <i class="bi bi-eye"></i> Xem
+                        </button>
+                        <button class="btn btn-sm btn-primary btn-action" onclick="goToPrescription(${patient.id})">
+                            <i class="bi bi-capsule"></i> Kê đơn
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Hàm cập nhật phân trang
+        function updatePagination(pagination) {
+            const paginationElement = document.getElementById('pagination');
+            paginationElement.innerHTML = '';
+
+            // Nút Previous
+            const prevLi = document.createElement('li');
+            prevLi.className = `page-item ${!pagination.previous ? 'disabled' : ''}`;
+            prevLi.innerHTML = `
+                <a class="page-link" href="#" onclick="fetchPatients(${pagination.current_page - 1})" ${!pagination.previous ? 'tabindex="-1"' : ''}>
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            `;
+            paginationElement.appendChild(prevLi);
+
+            // Các nút số trang
+            for (let i = 1; i <= pagination.total_pages; i++) {
+                const li = document.createElement('li');
+                li.className = `page-item ${i === pagination.current_page ? 'active' : ''}`;
+                li.innerHTML = `
+                    <a class="page-link" href="#" onclick="fetchPatients(${i})">${i}</a>
+                `;
+                paginationElement.appendChild(li);
+            }
+
+            // Nút Next
+            const nextLi = document.createElement('li');
+            nextLi.className = `page-item ${!pagination.next ? 'disabled' : ''}`;
+            nextLi.innerHTML = `
+                <a class="page-link" href="#" onclick="fetchPatients(${pagination.current_page + 1})" ${!pagination.next ? 'tabindex="-1"' : ''}>
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            `;
+            paginationElement.appendChild(nextLi);
+        }
+
+        // Hàm xem chi tiết bệnh nhân
+        async function viewPatient(id) {
+            try {
+                let currentToken = token;
+                let response = await fetch(`http://localhost:8080/api/patients/${id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${currentToken}`
+                    }
+                });
+
+                if (response.status === 401) {
+                    const newToken = await refreshAccessToken();
+                    if (newToken) {
+                        currentToken = newToken;
+                        response = await fetch(`http://localhost:8080/api/patients/${id}`, {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${currentToken}`
+                            }
+                        });
+                    }
+                }
+
+                if (response.ok) {
+                    const patient = await response.json();
+                    
+                    // Hiển thị thông tin chi tiết
+                    document.getElementById('detailId').textContent = patient.id;
+                    document.getElementById('detailFullName').textContent = patient.full_name;
+                    document.getElementById('detailDob').textContent = new Date(patient.date_of_birth).toLocaleDateString('vi-VN');
+                    document.getElementById('detailGender').textContent = convertGender(patient.gender);
+                    document.getElementById('detailPhone').textContent = patient.phone_number;
+                    document.getElementById('detailEmail').textContent = patient.email;
+                    document.getElementById('detailBloodType').textContent = patient.blood_type;
+                    document.getElementById('detailStatus').textContent = patient.is_active ? 'Đang hoạt động' : 'Không hoạt động';
+
+                    // Hiển thị modal
+                    const modal = new bootstrap.Modal(document.getElementById('patientDetailModal'));
+                    modal.show();
+                } else {
+                    alert('Không thể lấy thông tin chi tiết bệnh nhân. Vui lòng thử lại sau.');
+                }
+            } catch (error) {
+                console.error('Lỗi:', error);
+                alert('Có lỗi xảy ra khi lấy thông tin chi tiết bệnh nhân.');
+            }
+        }
+
+        // Hàm chuyển đến trang kê đơn thuốc
+        function goToPrescription(id) {
+            // Lưu thông tin bệnh nhân vào localStorage
+            const patient = patients.find(p => p.id === id);
+            if (patient) {
+                localStorage.setItem('current_patient', JSON.stringify(patient));
+                window.location.href = `/prescription/${id}`;
+            } else {
+                // Nếu không tìm thấy trong biến patients, lấy từ API
+                fetch(`http://localhost:8080/api/patients/${id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                .then(response => response.json())
+                .then(patient => {
+                    localStorage.setItem('current_patient', JSON.stringify(patient));
+                    window.location.href = `/prescription/${id}`;
+                })
+                .catch(error => {
+                    console.error('Lỗi:', error);
+                    alert('Không thể lấy thông tin bệnh nhân. Vui lòng thử lại sau.');
+                });
+            }
+        }
+
+        // Xử lý nút kê đơn thuốc trong modal
+        document.getElementById('prescribeBtn').addEventListener('click', function() {
+            const patientId = document.getElementById('detailId').textContent;
+            goToPrescription(patientId);
+        });
+
+        // Xử lý đăng xuất
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+            localStorage.removeItem('user');
+            window.location.href = '/login';
+        });
+
+        // Xử lý tìm kiếm
+        document.getElementById('searchBtn').addEventListener('click', () => {
+            const searchTerm = document.getElementById('searchInput').value;
+            // TODO: Implement search functionality
+            console.log('Search term:', searchTerm);
+        });
+
+        // Xử lý thêm bệnh nhân
+        document.getElementById('addPatientBtn').addEventListener('click', () => {
+            // TODO: Implement add patient functionality
+            console.log('Add new patient');
+        });
+
+        // Gọi hàm lấy danh sách bệnh nhân khi trang được tải
+        fetchPatients();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

@@ -1,0 +1,657 @@
+{
+  "ontology": {
+    "version": "1.0",
+    "last_updated": "2024-03-20",
+    "language": "vi",
+    "classes": {
+      "Disease": {
+        "properties": {
+          "name": "COVID-19",
+          "scientific_name": "SARS-CoV-2",
+          "type": "Viral Disease",
+          "transmission_method": ["Respiratory droplets", "Surface contact"],
+          "severity_level": ["Asymptomatic", "Mild", "Moderate", "Severe", "Critical"]
+        }
+      },
+      "Symptom": {
+        "properties": {
+          "name": "String",
+          "severity": ["Mild", "Moderate", "Severe"],
+          "duration": "String",
+          "common_in": ["Children", "Adults", "Elderly"]
+        }
+      },
+      "Treatment": {
+        "properties": {
+          "name": "String",
+          "type": ["Medication", "Therapy", "Supportive care"],
+          "effectiveness": ["High", "Medium", "Low"],
+          "side_effects": ["String"],
+          "contraindications": ["String"]
+        }
+      },
+      "Prevention": {
+        "properties": {
+          "name": "String",
+          "type": ["Vaccination", "Behavioral", "Environmental"],
+          "effectiveness": ["High", "Medium", "Low"],
+          "target_audience": ["All", "High-risk", "Children", "Elderly"]
+        }
+      },
+      "Vaccine": {
+        "properties": {
+          "name": "String",
+          "manufacturer": "String",
+          "efficacy": "Number",
+          "doses_required": "Number",
+          "storage_requirements": "String",
+          "side_effects": ["String"]
+        }
+      },
+      "RiskGroup": {
+        "properties": {
+          "name": "String",
+          "risk_level": ["High", "Medium", "Low"],
+          "age_group": "String",
+          "conditions": ["String"]
+        }
+      },
+      "Variant": {
+        "properties": {
+          "name": "String",
+          "first_detected": "Date",
+          "transmission_rate": "Number",
+          "severity": ["High", "Medium", "Low"],
+          "vaccine_effectiveness": "Number"
+        }
+      }
+    },
+    "relationships": {
+      "Disease_has_symptom": "Disease -> has_symptom -> Symptom",
+      "Disease_can_be_treated_by": "Disease -> can_be_treated_by -> Treatment",
+      "Disease_can_be_prevented_by": "Disease -> can_be_prevented_by -> Prevention",
+      "Disease_has_vaccine": "Disease -> has_vaccine -> Vaccine",
+      "Disease_affects_risk_group": "Disease -> affects_risk_group -> RiskGroup",
+      "Disease_has_variant": "Disease -> has_variant -> Variant",
+      "Symptom_requires_treatment": "Symptom -> requires_treatment -> Treatment",
+      "Prevention_includes_vaccine": "Prevention -> includes_vaccine -> Vaccine"
+    },
+    "instances": {
+      "diseases": [
+        {
+          "id": "COVID-19",
+          "name": "COVID-19",
+          "scientific_name": "SARS-CoV-2",
+          "symptoms": ["sốt", "ho", "khó thở"],
+          "treatments": ["Molnupiravir", "Oxygen therapy"],
+          "preventions": ["Vaccination", "Mask wearing"],
+          "vaccines": ["Pfizer", "Moderna"]
+        }
+      ],
+      "symptoms": [
+        {
+          "id": "fever",
+          "name": "Sốt",
+          "severity": "Mild",
+          "duration": "2-14 days",
+          "common_in": ["All"]
+        },
+        {
+          "id": "cough",
+          "name": "Ho",
+          "severity": "Moderate",
+          "duration": "1-3 weeks",
+          "common_in": ["Adults", "Elderly"]
+        }
+      ],
+      "treatments": [
+        {
+          "id": "molnupiravir",
+          "name": "Molnupiravir",
+          "type": "Medication",
+          "effectiveness": "Medium",
+          "side_effects": ["Nausea", "Diarrhea"],
+          "contraindications": "Pregnancy"
+        }
+      ],
+      "preventions": [
+        {
+          "id": "mask_wearing",
+          "name": "Đeo khẩu trang",
+          "type": "Behavioral",
+          "effectiveness": "High",
+          "target_audience": "All"
+        }
+      ],
+      "vaccines": [
+        {
+          "id": "pfizer",
+          "name": "Pfizer-BioNTech",
+          "manufacturer": "Pfizer",
+          "efficacy": 95,
+          "doses_required": 2,
+          "storage_requirements": "-70°C",
+          "side_effects": ["Fever", "Fatigue"]
+        }
+      ],
+      "risk_groups": [
+        {
+          "id": "elderly",
+          "name": "Người cao tuổi",
+          "risk_level": "High",
+          "age_group": "60+",
+          "conditions": ["Bệnh tim mạch", "Tiểu đường"]
+        }
+      ],
+      "variants": [
+        {
+          "id": "omicron_xec",
+          "name": "Omicron XEC",
+          "first_detected": "2023",
+          "transmission_rate": 1.5,
+          "severity": "Medium",
+          "vaccine_effectiveness": 0.8
+        }
+      ]
+    }
+  },
+  "qa_pairs": {
+    "categories": {
+      "thong_tin_chung": {
+        "title": "Thông tin chung về COVID-19",
+        "intent": ["covid là gì", "thông tin covid", "covid-19"],
+        "data": [
+          {
+            "question": "COVID-19 là gì?",
+            "answer": "COVID-19 là bệnh truyền nhiễm do virus SARS-CoV-2 gây ra, thuộc họ coronavirus. Được phát hiện lần đầu ở Wuhan, Trung Quốc cuối năm 2019 và được WHO tuyên bố là đại dịch vào tháng 3/2020.",
+            "keywords": ["covid-19", "coronavirus", "sars-cov-2", "virus", "đại dịch"],
+            "related_instances": ["COVID-19", "SARS-CoV-2"]
+          },
+          {
+            "question": "Virus SARS-CoV-2 lây truyền như thế nào?",
+            "answer": "Virus lây truyền chủ yếu qua đường hô hấp thông qua giọt bắn khi ho, hắt hơi, nói chuyện. Có thể lây qua tiếp xúc với bề mặt nhiễm virus rồi chạm vào mắt, mũi, miệng.",
+            "keywords": ["lây truyền", "đường hô hấp", "giọt bắn", "tiếp xúc"]
+          },
+          {
+            "question": "COVID-19 có nguy hiểm không?",
+            "answer": "Mức độ nguy hiểm khác nhau tùy từng người. Có thể từ không triệu chứng đến viêm phổi nặng, suy hô hấp và tử vong. Người cao tuổi và có bệnh nền có nguy cơ cao hơn.",
+            "keywords": ["nguy hiểm", "mức độ nặng", "tử vong", "nguy cơ cao"]
+          }
+        ]
+      },
+      "trieu_chung": {
+        "title": "Triệu chứng COVID-19",
+        "intent": ["triệu chứng covid", "dấu hiệu covid", "biểu hiện covid"],
+        "data": [
+          {
+            "question": "Các triệu chứng phổ biến của COVID-19 là gì?",
+            "answer": "Triệu chứng phổ biến bao gồm: sốt, ho khô, mệt mỏi, đau họng, khó thở, mất vị giác/khứu giác, đau đầu, đau cơ, buồn nôn và tiêu chảy.",
+            "keywords": ["sốt", "ho", "mệt mỏi", "đau họng", "khó thở", "mất vị giác", "đau đầu"]
+          },
+          {
+            "question": "Triệu chứng nặng của COVID-19?",
+            "answer": "Triệu chứng nặng: khó thở nghiêm trọng, đau ngực dai dẳng, lú lẫn, môi xanh, suy hô hấp. Cần cấp cứu ngay lập tức khi có các dấu hiệu này.",
+            "keywords": ["triệu chứng nặng", "khó thở nghiêm trọng", "đau ngực", "suy hô hấp", "cấp cứu"]
+          },
+          {
+            "question": "Triệu chứng biến thể Omicron XEC mới?",
+            "answer": "Biến thể Omicron XEC có triệu chứng tương tự các biến thể trước nhưng có tốc độ lây lan nhanh hơn. Vẫn bao gồm sốt, ho, đau họng, mệt mỏi.",
+            "keywords": ["omicron xec", "biến thể mới", "lây lan nhanh"]
+          },
+          {
+            "question": "Khi nào cần đi khám bác sĩ?",
+            "answer": "Cần đi khám ngay khi có triệu chứng hô hấp dù nhẹ, đặc biệt nếu có sốt cao, khó thở, đau ngực. Người có nguy cơ cao nên đi khám sớm.",
+            "keywords": ["đi khám", "sốt cao", "khó thở", "đau ngực", "nguy cơ cao"]
+          }
+        ]
+      },
+      "nhom_nguy_co": {
+        "title": "Nhóm có nguy cơ cao",
+        "intent": ["nguy cơ cao", "nhóm nguy hiểm", "ai dễ bị nặng"],
+        "data": [
+          {
+            "question": "Ai có nguy cơ mắc COVID-19 nặng?",
+            "answer": "Người từ 60 tuổi trở lên, người có bệnh mãn tính (tim mạch, tiểu đường, phổi, thận), béo phì (BMI≥27.5), suy giảm miễn dịch, phụ nữ mang thai, người hút thuốc.",
+            "keywords": ["người cao tuổi", "bệnh mãn tính", "tiểu đường", "béo phì", "mang thai", "hút thuốc"]
+          },
+          {
+            "question": "Tại sao người cao tuổi có nguy cơ cao?",
+            "answer": "Hệ miễn dịch suy giảm theo tuổi, thường có nhiều bệnh đi kèm, khả năng phục hồi chậm hơn. Cần được bảo vệ và theo dõi đặc biệt.",
+            "keywords": ["người cao tuổi", "hệ miễn dịch", "bệnh đi kèm"]
+          },
+          {
+            "question": "Phụ nữ mang thai có nguy cơ cao không?",
+            "answer": "Có, phụ nữ mang thai và mới sinh (trong 42 ngày sau sinh) có nguy cơ cao bị COVID-19 nặng hơn so với phụ nữ không mang thai.",
+            "keywords": ["mang thai", "phụ nữ", "sau sinh", "nguy cơ cao"]
+          }
+        ]
+      },
+      "phong_ngua": {
+        "title": "Phòng ngừa COVID-19",
+        "intent": ["phòng ngừa", "cách phòng", "bảo vệ", "ngăn ngừa"],
+        "data": [
+          {
+            "question": "Cách phòng ngừa COVID-19 hiệu quả?",
+            "answer": "Đeo khẩu trang nơi đông người, rửa tay thường xuyên bằng xà phòng/gel khử khuẩn 60-90% cồn, giữ khoảng cách tối thiểu 1m, tiêm vắc xin đầy đủ, tránh nơi đông người.",
+            "keywords": ["đeo khẩu trang", "rửa tay", "khoảng cách", "tiêm vắc xin", "tránh đông người"]
+          },
+          {
+            "question": "Cách rửa tay đúng để phòng COVID-19?",
+            "answer": "Rửa tay bằng xà phòng và nước ít nhất 20 giây hoặc dùng gel khử khuẩn có nồng độ cồn 60-90%. Rửa kỹ lòng bàn tay, mu bàn tay, kẽ ngón tay, móng tay.",
+            "keywords": ["rửa tay", "xà phòng", "gel khử khuẩn", "20 giây", "60-90% cồn"]
+          },
+          {
+            "question": "Tại sao phải đeo khẩu trang?",
+            "answer": "Khẩu trang ngăn giọt bắn từ ho, hắt hơi, nói chuyện lây ra môi trường và bảo vệ người khác. Cũng giảm nguy cơ hít phải virus từ không khí.",
+            "keywords": ["khẩu trang", "giọt bắn", "bảo vệ", "ngăn lây lan"]
+          },
+          {
+            "question": "Vệ sinh nhà cửa, đồ vật như thế nào?",
+            "answer": "Vệ sinh, khử khuẩn các bề mặt thường xuyên tiếp xúc: tay nắm cửa, bàn ghế, tay vịn, công tắc, điện thoại, bồn cầu. Dùng cồn 70% hoặc nước tẩy pha loãng.",
+            "keywords": ["vệ sinh", "khử khuẩn", "bề mặt", "cồn 70%", "nước tẩy"]
+          }
+        ]
+      },
+      "vac_xin": {
+        "title": "Vắc xin COVID-19",
+        "intent": ["vắc xin", "tiêm chủng", "vaccine covid"],
+        "data": [
+          {
+            "question": "Ai nên tiêm vắc xin COVID-19?",
+            "answer": "Tất cả người từ 6 tháng tuổi trở lên được khuyến khích tiêm vắc xin, đặc biệt nhóm nguy cơ cao: người cao tuổi, có bệnh nền, nhân viên y tế, giáo viên.",
+            "keywords": ["tiêm vắc xin", "6 tháng tuổi", "nhóm nguy cơ", "nhân viên y tế"]
+          },
+          {
+            "question": "Các loại vắc xin COVID-19 ở Việt Nam?",
+            "answer": "Hiện có các vắc xin: Pfizer-BioNTech/Comirnaty, Moderna/Spikevax trong Chương trình Tiêm chủng Quốc gia. Miễn phí cho công dân và thường trú tại Việt Nam.",
+            "keywords": ["pfizer", "moderna", "comirnaty", "spikevax", "miễn phí"]
+          },
+          {
+            "question": "Vắc xin có hiệu quả với biến thể mới không?",
+            "answer": "Vắc xin hiện tại vẫn có hiệu quả với các biến thể mới như Omicron XEC, đặc biệt trong việc ngăn ngừa bệnh nặng và tử vong. Nên tiêm nhắc lại hàng năm.",
+            "keywords": ["hiệu quả", "biến thể mới", "omicron xec", "tiêm nhắc", "hàng năm"]
+          },
+          {
+            "question": "Ai không nên tiêm vắc xin?",
+            "answer": "Người dị ứng nặng với thành phần vắc xin, đang bệnh nặng có sốt cao. Phụ nữ mang thai, bệnh nhân ung thư nên tham khảo ý kiến bác sĩ.",
+            "keywords": ["dị ứng", "bệnh nặng", "sốt cao", "mang thai", "ung thư", "tham khảo bác sĩ"]
+          }
+        ]
+      },
+      "dieu_tri": {
+        "title": "Điều trị COVID-19",
+        "intent": ["điều trị", "chữa covid", "thuốc covid", "cách chữa"],
+        "data": [
+          {
+            "question": "Hiện tại có thuốc chữa COVID-19 không?",
+            "answer": "Chưa có thuốc đặc hiệu chữa khỏi hoàn toàn COVID-19. Điều trị chủ yếu là hỗ trợ triệu chứng và chăm sóc hỗ trợ để giúp cơ thể chống lại virus.",
+            "keywords": ["thuốc đặc hiệu", "chữa khỏi", "hỗ trợ triệu chứng", "chăm sóc hỗ trợ"]
+          },
+          {
+            "question": "Các phương pháp điều trị COVID-19?",
+            "answer": "Điều trị theo 4 giai đoạn: 1) Liệu pháp oxy, 2) Oxy cao áp, 3) Thở máy, 4) ECMO. Còn có thể dùng thuốc kháng virus, corticosteroid, kháng sinh nếu nhiễm khuẩn thứ phát.",
+            "keywords": ["liệu pháp oxy", "oxy cao áp", "thở máy", "ecmo", "kháng virus", "corticosteroid"]
+          },
+          {
+            "question": "Thuốc kháng virus nào được sử dụng?",
+            "answer": "Molnupiravir được nghiên cứu cho bệnh nhân COVID-19 nhẹ đến trung bình có nguy cơ cao, giảm 30% tỷ lệ nhập viện. Cần dùng trong 5 ngày đầu có triệu chứng.",
+            "keywords": ["molnupiravir", "nhẹ đến trung bình", "nguy cơ cao", "5 ngày đầu"]
+          },
+          {
+            "question": "Điều trị tại nhà như thế nào?",
+            "answer": "Cách ly tại nhà ít nhất 5 ngày, đeo khẩu trang 10 ngày, nghỉ ngơi, uống nhiều nước, theo dõi triệu chứng. Đi khám ngay nếu khó thở, đau ngực, sốt cao kéo dài.",
+            "keywords": ["cách ly tại nhà", "5 ngày", "đeo khẩu trang", "nghỉ ngơi", "theo dõi triệu chứng"]
+          }
+        ]
+      },
+      "xet_nghiem": {
+        "title": "Xét nghiệm COVID-19",
+        "intent": ["xét nghiệm", "test covid", "chẩn đoán"],
+        "data": [
+          {
+            "question": "Các loại xét nghiệm COVID-19?",
+            "answer": "Có 2 loại chính: 1) RT-PCR (chính xác nhất, kết quả trong 1-2 ngày), 2) Test nhanh kháng nguyên (kết quả trong 15-30 phút, độ chính xác thấp hơn).",
+            "keywords": ["rt-pcr", "test nhanh", "kháng nguyên", "chính xác", "15-30 phút"]
+          },
+          {
+            "question": "Khi nào nên làm xét nghiệm?",
+            "answer": "Khi có triệu chứng nghi ngờ COVID-19, tiếp xúc gần với người nhiễm bệnh, trước khi đi du lịch, hoặc theo yêu cầu của cơ quan y tế.",
+            "keywords": ["triệu chứng nghi ngờ", "tiếp xúc gần", "đi du lịch", "yêu cầu y tế"]
+          },
+          {
+            "question": "Làm sao để lấy mẫu xét nghiệm?",
+            "answer": "Lấy mẫu dịch mũi họng bằng que cotton, đưa sâu vào mũi/họng. Có thể tự lấy mẫu với test nhanh hoặc đến cơ sở y tế cho RT-PCR.",
+            "keywords": ["lấy mẫu", "dịch mũi họng", "que cotton", "tự lấy mẫu", "cơ sở y tế"]
+          },
+          {
+            "question": "Xét nghiệm dương tính phải làm gì?",
+            "answer": "Cách ly ngay tại nhà hoặc cơ sở y tế, thông báo cho cơ quan y tế địa phương, liệt kê người tiếp xúc gần, theo dõi sức khỏe, tuân thủ hướng dẫn điều trị.",
+            "keywords": ["cách ly", "thông báo y tế", "người tiếp xúc", "theo dõi sức khỏe"]
+          }
+        ]
+      },
+      "cach_ly": {
+        "title": "Cách ly và theo dõi",
+        "intent": ["cách ly", "theo dõi", "quarantine", "isolation"],
+        "data": [
+          {
+            "question": "Cách ly COVID-19 bao lâu?",
+            "answer": "Cách ly ít nhất 5 ngày kể từ khi có triệu chứng hoặc xét nghiệm dương tính. Đeo khẩu trang thêm 5 ngày nữa. Có thể kết thúc sớm nếu hết sốt 24h và triệu chứng giảm.",
+            "keywords": ["5 ngày", "triệu chứng", "xét nghiệm dương tính", "hết sốt", "24 giờ"]
+          },
+          {
+            "question": "Cách ly tại nhà như thế nào?",
+            "answer": "Ở phòng riêng, sử dụng nhà vệ sinh riêng nếu có thể, đeo khẩu trang khi ra khỏi phòng, tránh tiếp xúc gần người khác, vệ sinh tay thường xuyên.",
+            "keywords": ["phòng riêng", "nhà vệ sinh riêng", "tránh tiếp xúc", "vệ sinh tay"]
+          },
+          {
+            "question": "Người chăm sóc cần làm gì?",
+            "answer": "Đeo khẩu trang y tế, găng tay khi tiếp xúc, rửa tay thường xuyên, hạn chế thời gian tiếp xúc, thông gió phòng tốt, theo dõi sức khỏe bản thân.",
+            "keywords": ["khẩu trang y tế", "găng tay", "hạn chế tiếp xúc", "thông gió", "theo dõi sức khỏe"]
+          },
+          {
+            "question": "Khi nào được kết thúc cách ly?",
+            "answer": "Sau ít nhất 5 ngày và: hết sốt ít nhất 24h không dùng thuốc hạ sốt, các triệu chứng khác thuyên giảm rõ rệt. Vẫn đeo khẩu trang 5 ngày tiếp theo.",
+            "keywords": ["5 ngày", "hết sốt 24h", "triệu chứng thuyên giảm", "đeo khẩu trang"]
+          }
+        ]
+      },
+      "tre_em": {
+        "title": "COVID-19 ở trẻ em",
+        "intent": ["trẻ em", "covid trẻ con", "trẻ nhỏ", "em bé"],
+        "data": [
+          {
+            "question": "Trẻ em có dễ mắc COVID-19 không?",
+            "answer": "Trẻ em có thể mắc COVID-19 nhưng thường có triệu chứng nhẹ hơn người lớn. Tuy nhiên, trẻ sơ sinh và có bệnh nền vẫn có nguy cơ bệnh nặng.",
+            "keywords": ["trẻ em", "triệu chứng nhẹ", "trẻ sơ sinh", "bệnh nền", "nguy cơ"]
+          },
+          {
+            "question": "Triệu chứng COVID-19 ở trẻ em?",
+            "answer": "Sốt, ho, đau họng, chảy nước mũi, mệt mỏi, buồn nôn, tiêu chảy. Một số trẻ có thể không có triệu chứng hoặc triệu chứng rất nhẹ.",
+            "keywords": ["sốt", "ho", "chảy nước mũi", "buồn nôn", "tiêu chảy", "không triệu chứng"]
+          },
+          {
+            "question": "Trẻ em có nên tiêm vắc xin COVID-19?",
+            "answer": "Có, trẻ từ 6 tháng tuổi trở lên được khuyến cáo tiêm vắc xin COVID-19. Vắc xin an toàn và hiệu quả cho trẻ em.",
+            "keywords": ["6 tháng tuổi", "khuyến cáo tiêm", "an toàn", "hiệu quả"]
+          },
+          {
+            "question": "Cách bảo vệ trẻ em khỏi COVID-19?",
+            "answer": "Tiêm vắc xin đầy đủ, dạy trẻ rửa tay thường xuyên, đeo khẩu trang nơi đông người, tránh cho trẻ tiếp xúc với người ốm, giữ nhà cửa sạch sẽ.",
+            "keywords": ["tiêm vắc xin", "rửa tay", "đeo khẩu trang", "tránh người ốm", "nhà cửa sạch"]
+          }
+        ]
+      },
+      "bien_the": {
+        "title": "Các biến thể COVID-19",
+        "intent": ["biến thể", "variant", "chủng mới", "đột biến"],
+        "data": [
+          {
+            "question": "Biến thể COVID-19 là gì?",
+            "answer": "Biến thể là dạng đột biến của virus SARS-CoV-2. Một số biến thể có khả năng lây lan mạnh hơn hoặc gây bệnh nặng hơn so với chủng gốc.",
+            "keywords": ["đột biến", "sars-cov-2", "lây lan mạnh", "bệnh nặng", "chủng gốc"]
+          },
+          {
+            "question": "Biến thể Omicron XEC là gì?",
+            "answer": "Omicron XEC là biến thể mới của SARS-CoV-2 có tốc độ lây lan nhanh, đang lưu hành ở hơn 50 quốc gia. Triệu chứng tương tự các biến thể trước.",
+            "keywords": ["omicron xec", "tốc độ lây lan nhanh", "50 quốc gia", "triệu chứng tương tự"]
+          },
+          {
+            "question": "Vắc xin có hiệu quả với biến thể mới?",
+            "answer": "Vắc xin hiện tại vẫn có hiệu quả với các biến thể mới, đặc biệt trong việc ngăn ngừa bệnh nặng và tử vong. Khuyến cáo tiêm nhắc hàng năm.",
+            "keywords": ["hiệu quả", "biến thể mới", "ngăn ngừa bệnh nặng", "tiêm nhắc hàng năm"]
+          },
+          {
+            "question": "Làm sao để theo dõi các biến thể mới?",
+            "answer": "Theo dõi thông tin từ Bộ Y tế, WHO, CDC. Tuân thủ các biện pháp phòng ngừa cơ bản bất kể biến thể nào đang lưu hành.",
+            "keywords": ["bộ y tế", "who", "cdc", "biện pháp phòng ngừa", "lưu hành"]
+          }
+        ]
+      },
+      "myt_duong_tinh": {
+        "title": "Hậu COVID-19 và COVID kéo dài",
+        "intent": ["hậu covid", "covid kéo dài", "long covid", "di chứng"],
+        "data": [
+          {
+            "question": "Hậu COVID-19 là gì?",
+            "answer": "Hậu COVID-19 là tình trạng các triệu chứng kéo dài hơn 4 tuần sau khi nhiễm bệnh. Có thể bao gồm mệt mỏi, khó thở, mất trí nhớ, đau đầu kéo dài.",
+            "keywords": ["hậu covid", "4 tuần", "mệt mỏi", "khó thở", "mất trí nhớ", "đau đầu"]
+          },
+          {
+            "question": "Ai có nguy cơ bị hậu COVID-19?",
+            "answer": "Bất kỳ ai nhiễm COVID-19 đều có thể bị hậu COVID, nhưng phổ biến hơn ở người bệnh nặng, người cao tuổi, phụ nữ, và người có nhiều bệnh nền.",
+            "keywords": ["bất kỳ ai", "bệnh nặng", "người cao tuổi", "phụ nữ", "nhiều bệnh nền"]
+          },
+          {
+            "question": "Cách điều trị hậu COVID-19?",
+            "answer": "Chưa có điều trị đặc hiệu. Điều trị triệu chứng, phục hồi chức năng, tập thể dục từ từ, dinh dưỡng tốt, nghỉ ngơi đầy đủ. Cần theo dõi y tế lâu dài.",
+            "keywords": ["điều trị triệu chứng", "phục hồi chức năng", "tập thể dục", "dinh dưỡng", "theo dõi lâu dài"]
+          },
+          {
+            "question": "Làm sao để phòng ngừa hậu COVID-19?",
+            "answer": "Cách tốt nhất là phòng ngừa nhiễm COVID-19 bằng tiêm vắc xin, đeo khẩu trang, giữ khoảng cách. Nếu nhiễm bệnh, điều trị sớm và nghỉ ngơi đầy đủ.",
+            "keywords": ["phòng ngừa nhiễm", "tiêm vắc xin", "đeo khẩu trang", "điều trị sớm", "nghỉ ngơi"]
+          }
+        ]
+      },
+      "cap_cuu": {
+        "title": "Cấp cứu COVID-19",
+        "intent": ["cấp cứu", "khẩn cấp", "nguy hiểm", "nghiêm trọng"],
+        "data": [
+          {
+            "question": "Khi nào cần cấp cứu COVID-19?",
+            "answer": "Cần cấp cứu ngay khi có: khó thở nghiêm trọng, đau ngực dai dẳng, lú lẫn/mất ý thức, môi xanh tím, không thể thức dậy hoặc giữ tỉnh táo.",
+            "keywords": ["khó thở nghiêm trọng", "đau ngực", "lú lẫn", "môi xanh", "mất ý thức"]
+          },
+          {
+            "question": "Các dấu hiệu nguy hiểm ở trẻ em?",
+            "answer": "Khó thở, đau ngực, lú lẫn, không thể thức dậy, môi xanh tím, đau bụng dữ dội, không thể uống nước hoặc giữ được thức ăn.",
+            "keywords": ["trẻ em", "khó thở", "lú lẫn", "môi xanh", "đau bụng", "không uống được"]
+          },
+          {
+            "question": "Phải làm gì khi có dấu hiệu nguy hiểm?",
+            "answer": "Gọi cấp cứu 115 ngay lập tức, thông báo người bệnh có COVID-19, đeo khẩu trang cho người bệnh, giữ đường thở thông thoáng.",
+            "keywords": ["gọi 115", "thông báo covid", "đeo khẩu trang", "đường thở thông thoáng"]
+          }
+        ]
+      },
+      "du_lich": {
+        "title": "Du lịch và COVID-19",
+        "intent": ["du lịch", "đi máy bay", "ra nước ngoài", "travel"],
+        "data": [
+          {
+            "question": "Du lịch trong mùa dịch COVID-19 có an toàn?",
+            "answer": "Du lịch tăng nguy cơ phơi nhiễm COVID-19. Cần cân nhắc kỹ, tiêm vắc xin đầy đủ, tuân thủ quy định của địa phương và quốc gia đến.",
+            "keywords": ["tăng nguy cơ", "cân nhắc", "tiêm vắc xin", "quy định địa phương"]
+          },
+          {
+            "question": "Chuẩn bị gì trước khi du lịch?",
+            "answer": "Tiêm vắc xin đầy đủ, kiểm tra yêu cầu xét nghiệm, chuẩn bị khẩu trang dự phòng, gel rửa tay, thuốc cá nhân, bảo hiểm y tế.",
+            "keywords": ["tiêm vắc xin đầy đủ", "yêu cầu xét nghiệm", "khẩu trang", "gel rửa tay", "bảo hiểm"]
+          },
+          {
+            "question": "Biện pháp an toàn khi đi máy bay?",
+            "answer": "Đeo khẩu trang suốt chuyến bay, rửa tay thường xuyên, tránh chạm vào mặt, giữ khoảng cách khi có thể, mang gel khử khuẩn.",
+            "keywords": ["đeo khẩu trang", "rửa tay", "tránh chạm mặt", "giữ khoảng cách", "gel khử khuẩn"]
+          },
+          {
+            "question": "Sau khi du lịch về cần làm gì?",
+            "answer": "Theo dõi sức khỏe 7-10 ngày, làm xét nghiệm nếu có triệu chứng, hạn chế tiếp xúc người cao tuổi/có bệnh nền trong vài ngày đầu.",
+            "keywords": ["theo dõi 7-10 ngày", "xét nghiệm", "hạn chế tiếp xúc", "người cao tuổi"]
+          }
+        ]
+      },
+      "mang_thai": {
+        "title": "COVID-19 và thai kỳ",
+        "intent": ["mang thai", "bà bầu", "thai phụ", "pregnancy"],
+        "data": [
+          {
+            "question": "COVID-19 có ảnh hưởng đến thai kỳ?",
+            "answer": "Phụ nữ mang thai có nguy cơ cao bị COVID-19 nặng hơn. Có thể tăng nguy cơ sinh non, tiền sản giật, và các biến chứng khác.",
+            "keywords": ["nguy cơ cao", "covid nặng", "sinh non", "tiền sản giật", "biến chứng"]
+          },
+          {
+            "question": "Thai phụ có nên tiêm vắc xin COVID-19?",
+            "answer": "Có, thai phụ được khuyến cáo tiêm vắc xin COVID-19. Vắc xin an toàn và hiệu quả, giúp bảo vệ cả mẹ và thai nhi.",
+            "keywords": ["khuyến cáo tiêm", "an toàn", "hiệu quả", "bảo vệ mẹ", "thai nhi"]
+          },
+          {
+            "question": "Thai phụ mắc COVID-19 cần lưu ý gì?",
+            "answer": "Theo dõi sát triệu chứng, liên hệ bác sĩ sản khoa ngay khi có dấu hiệu bất thường, không tự ý dùng thuốc, nghỉ ngơi đầy đủ.",
+            "keywords": ["theo dõi sát", "bác sĩ sản khoa", "dấu hiệu bất thường", "không tự ý dùng thuốc"]
+          },
+          {
+            "question": "COVID-19 có lây từ mẹ sang con không?",
+            "answer": "Lây truyền từ mẹ sang thai nhi trong tử cung rất hiếm gặp. Nguy cơ lây nhiễm chủ yếu sau sinh qua đường hô hấp nếu mẹ vẫn đang nhiễm bệnh.",
+            "keywords": ["lây từ mẹ sang con", "trong tử cung", "hiếm gặp", "sau sinh", "đường hô hấp"]
+          }
+        ]
+      },
+      "suc_khoe_tam_than": {
+        "title": "Sức khỏe tâm thần và COVID-19",
+        "intent": ["stress", "lo âu", "trầm cảm", "tâm lý", "sức khỏe tinh thần"],
+        "data": [
+          {
+            "question": "COVID-19 ảnh hưởng đến sức khỏe tâm thần như thế nào?",
+            "answer": "Đại dịch gây stress, lo âu, trầm cảm do cách ly, mất việc làm, lo sợ nhiễm bệnh, mất người thân. Cần chăm sóc sức khỏe tâm thần.",
+            "keywords": ["stress", "lo âu", "trầm cảm", "cách ly", "mất việc", "mất người thân"]
+          },
+          {
+            "question": "Cách giảm stress trong mùa dịch?",
+            "answer": "Duy trì thói quen hàng ngày, tập thể dục tại nhà, thiền định, giữ liên lạc với người thân, hạn chế xem tin tức quá nhiều, tìm kiếm sự hỗ trợ.",
+            "keywords": ["thói quen hàng ngày", "tập thể dục", "thiền định", "liên lạc người thân", "hạn chế tin tức"]
+          },
+          {
+            "question": "Khi nào cần tìm kiếm sự hỗ trợ tâm lý?",
+            "answer": "Khi có triệu chứng lo âu, trầm cảm kéo dài, mất ngủ, không thể làm việc bình thường, có ý nghĩ tự hại bản thân.",
+            "keywords": ["lo âu kéo dài", "trầm cảm", "mất ngủ", "không làm việc được", "tự hại bản thân"]
+          },
+          {
+            "question": "Trẻ em có bị ảnh hưởng tâm lý không?",
+            "answer": "Có, trẻ em có thể bị stress, lo âu do thay đổi thói quen, không đi học, ít gặp bạn bè. Cần quan tâm, lắng nghe và giải thích phù hợp với lứa tuổi.",
+            "keywords": ["trẻ em stress", "thay đổi thói quen", "không đi học", "quan tâm", "lắng nghe"]
+          }
+        ]
+      },
+      "dinh_duong": {
+        "title": "Dinh dưỡng và COVID-19",
+        "intent": ["dinh dưỡng", "ăn uống", "thức ăn", "tăng sức đề kháng"],
+        "data": [
+          {
+            "question": "Ăn gì để tăng sức đề kháng chống COVID-19?",
+            "answer": "Ăn đa dạng rau củ quả, protein (thịt, cá, trứng, đậu), ngũ cốc nguyên hạt, uống đủ nước, bổ sung vitamin C, D, kẽm nếu cần.",
+            "keywords": ["rau củ quả", "protein", "ngũ cốc nguyên hạt", "uống nước", "vitamin c", "vitamin d", "kẽm"]
+          },
+          {
+            "question": "Thực phẩm nào nên tránh?",
+            "answer": "Hạn chế đồ ăn nhanh, thức ăn chế biến sẵn, đồ uống có đường, rượu bia, thức ăn nhiều muối. Ưu tiên thực phẩm tươi, tự nấu tại nhà.",
+            "keywords": ["đồ ăn nhanh", "chế biến sẵn", "đồ uống có đường", "rượu bia", "nhiều muối", "thực phẩm tươi"]
+          },
+          {
+            "question": "Khi mắc COVID-19 nên ăn gì?",
+            "answer": "Ăn nhẹ, dễ tiêu hóa như cháo, súp, trái cây, uống nhiều nước, trà thảo mộc. Tránh thức ăn cay, nóng, khó nuốt khi đau họng.",
+            "keywords": ["ăn nhẹ", "dễ tiêu", "cháo", "súp", "trái cây", "uống nước", "tránh cay nóng"]
+          },
+          {
+            "question": "Có cần bổ sung vitamin không?",
+            "answer": "Nên bổ sung vitamin D, C, kẽm nếu thiếu hụt. Tuy nhiên, ưu tiên lấy từ thực phẩm tự nhiên. Tham khảo bác sĩ trước khi dùng thực phẩm chức năng.",
+            "keywords": ["vitamin d", "vitamin c", "kẽm", "thiếu hụt", "thực phẩm tự nhiên", "tham khảo bác sĩ"]
+          }
+        ]
+      },
+      "lam_viec_tai_nha": {
+        "title": "Làm việc tại nhà và COVID-19",
+        "intent": ["làm việc tại nhà", "work from home", "học online", "cách ly"],
+        "data": [
+          {
+            "question": "Cách làm việc hiệu quả tại nhà?",
+            "answer": "Thiết lập không gian riêng, giữ thời gian biểu cố định, trang phục phù hợp, nghỉ giải lao đều đặn, tập thể dục, giữ liên lạc đồng nghiệp.",
+            "keywords": ["không gian riêng", "thời gian biểu", "trang phục", "nghỉ giải lao", "tập thể dục", "liên lạc"]
+          },
+          {
+            "question": "Cách bảo vệ sức khỏe khi WFH lâu dài?",
+            "answer": "Ngồi đúng tư thế, nghỉ mắt 20-20-20 (20 phút nhìn vật cách 20 feet trong 20 giây), vận động thường xuyên, ra ngoài hít thở không khí trong lành.",
+            "keywords": ["ngồi đúng tư thế", "nghỉ mắt", "20-20-20", "vận động", "không khí trong lành"]
+          },
+          {
+            "question": "Làm sao cân bằng công việc và gia đình?",
+            "answer": "Đặt ranh giới rõ ràng giữa giờ làm và nghỉ, thông báo gia đình về lịch họp quan trọng, chia sẻ việc chăm con, dọn dẹp nhà cửa.",
+            "keywords": ["ranh giới rõ ràng", "thông báo gia đình", "lịch họp", "chia sẻ việc nhà"]
+          }
+        ]
+      },
+      "thong_tin_cap_nhat": {
+        "title": "Thông tin cập nhật và nguồn tin đáng tin cậy",
+        "intent": ["thông tin mới", "tin tức", "cập nhật", "nguồn tin"],
+        "data": [
+          {
+            "question": "Nguồn thông tin đáng tin cậy về COVID-19?",
+            "answer": "Bộ Y tế Việt Nam, WHO, CDC, các bệnh viện uy tín, trang web chính thức của cơ quan y tế. Tránh tin đồn trên mạng xã hội.",
+            "keywords": ["bộ y tế", "who", "cdc", "bệnh viện uy tín", "tránh tin đồn"]
+          },
+          {
+            "question": "Cách nhận biết tin giả về COVID-19?",
+            "answer": "Kiểm tra nguồn tin, so sánh với nhiều nguồn uy tín, tránh tin có nội dung quá giật gân, không chia sẻ tin chưa kiểm chứng, báo cáo tin sai sự thật.",
+            "keywords": ["kiểm tra nguồn", "so sánh nhiều nguồn", "quá giật gân", "không chia sẻ", "báo cáo tin sai"]
+          },
+          {
+            "question": "Làm sao để cập nhật thông tin mới nhất?",
+            "answer": "Theo dõi trang web Bộ Y tế, WHO, đăng ký nhận thông báo từ cơ quan y tế địa phương, xem tin tức từ các kênh truyền thông uy tín.",
+            "keywords": ["theo dõi website", "đăng ký thông báo", "y tế địa phương", "truyền thông uy tín"]
+          }
+        ]
+      },
+      "cau_hoi_thuong_gap": {
+        "title": "Câu hỏi thường gặp",
+        "intent": ["faq", "câu hỏi", "thắc mắc", "hỏi đáp"],
+        "data": [
+          {
+            "question": "Tôi đã tiêm vắc xin, có còn cần đeo khẩu trang không?",
+            "answer": "Có, vẫn nên đeo khẩu trang ở nơi đông người, kín gió, và khi có triệu chứng hô hấp để bảo vệ bản thân và người khác.",
+            "keywords": ["tiêm vắc xin", "đeo khẩu trang", "nơi đông người", "triệu chứng hô hấp"]
+          },
+          {
+            "question": "Có thể nhiễm COVID-19 hai lần không?",
+            "answer": "Có thể bị tái nhiễm, đặc biệt với các biến thể mới. Miễn dịch tự nhiên và vắc xin đều có thể giảm theo thời gian.",
+            "keywords": ["tái nhiễm", "biến thể mới", "miễn dịch tự nhiên", "giảm theo thời gian"]
+          },
+          {
+            "question": "Thuốc ho không kê đơn có hiệu quả không?",
+            "answer": "Có thể giúp giảm triệu chứng ho, nhưng không chữa khỏi COVID-19. Nên tham khảo dược sĩ hoặc bác sĩ trước khi sử dụng.",
+            "keywords": ["thuốc ho", "giảm triệu chứng", "không chữa khỏi", "tham khảo dược sĩ"]
+          },
+          {
+            "question": "Nước súc miệng có diệt được virus không?",
+            "answer": "Nước súc miệng có thể giảm virus trong miệng tạm thời nhưng không ngăn ngừa hoặc chữa khỏi COVID-19. Không thay thế các biện pháp phòng ngừa khác.",
+            "keywords": ["nước súc miệng", "giảm virus tạm thời", "không ngăn ngừa", "không thay thế"]
+          }
+        ]
+      }
+    }
+  },
+  "chatbot_responses": {
+    "greetings": [
+      "Xin chào! Tôi là trợ lý ảo COVID-19. Tôi có thể giúp bạn tìm hiểu về COVID-19, triệu chứng, cách phòng ngừa và điều trị. Bạn cần hỗ trợ thông tin gì?",
+      "Chào bạn! Tôi sẵn sàng hỗ trợ bạn các thông tin về COVID-19. Hãy hỏi tôi bất cứ điều gì bạn muốn biết về dịch bệnh này.",
+      "Xin chào! Bạn có thắc mắc gì về COVID-19 không? Tôi có thể chia sẻ thông tin về triệu chứng, phòng ngừa, điều trị và nhiều chủ đề khác."
+    ],
+    "fallback": [
+      "Xin lỗi, tôi không hiểu câu hỏi của bạn. Bạn có thể hỏi lại bằng cách khác được không?",
+      "Tôi chưa tìm thấy thông tin phù hợp với câu hỏi của bạn. Bạn có thể hỏi về: triệu chứng COVID-19, cách phòng ngừa, điều trị tại nhà, vắc xin, hoặc các biến thể mới."
+    ],
+    "emergency": [
+      "⚠️ KHẨN CẤP: Nếu bạn đang gặp khó thở nghiêm trọng, đau ngực dai dẳng, lú lẫn hoặc môi xanh tím, hãy gọi cấp cứu 115 NGAY LẬP TỨC!"
+    ]
+  },
+  "metadata": {
+    "created_by": "COVID-19 Information Assistant",
+    "purpose": "Ontology-based knowledge base for COVID-19 information",
+    "target_audience": "Vietnamese speakers",
+    "compliance": "Based on WHO, CDC, and Vietnam Ministry of Health guidelines",
+    "contact_info": {
+      "emergency": "115",
+      "health_ministry_hotline": "19003228",
+      "covid_hotline": "19009095"
+    }
+  }
+}
