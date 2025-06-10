@@ -74,6 +74,7 @@ log/
 *.sqlite3
 
 # Environment variables
+# ⚠️ QUAN TRỌNG: Tạo file .env với các biến môi trường thực của bạn
 .env
 .env.local
 .env.*.local

@@ -143,7 +143,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # JWT Settings
 JWT_AUTH = {
-    'JWT_SECRET_KEY': 'your-secret-key-here',  # Thay đổi trong môi trường production
+    'JWT_SECRET_KEY': 'THAY-DOI-JWT-SECRET-KEY-NAY',  # Thay đổi trong môi trường production
     'JWT_ALGORITHM': 'HS256',
     'JWT_EXPIRATION_DELTA': timedelta(days=1),
     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),

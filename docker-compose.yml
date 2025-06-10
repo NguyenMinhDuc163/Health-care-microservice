@@ -8,7 +8,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - SECRET_KEY=django-insecure-gateway-key
+      - SECRET_KEY=THAY-DOI-GATEWAY-SECRET-KEY
       - AUTH_SERVICE_URL=http://auth-service:8000
       - PATIENT_SERVICE_URL=http://patient-service:8002
       - CHATBOT_SERVICE_URL=http://chatbot-service:8009
@@ -35,7 +35,7 @@ services:
     environment:
       - DB_NAME=payment_db
       - DB_USER=postgres
-      - DB_PASSWORD=NguyenDuc@163
+      - DB_PASSWORD=THAY-DOI-MAT-KHAU-DATABASE
       - DB_HOST=postgres
       - DB_PORT=5432
       - GATEWAY_URL=http://gateway:8080
@@ -51,13 +51,13 @@ services:
     ports:
       - "8001:8000"
     environment:
-      - SECRET_KEY=gsljgsdgiusdfgsd#5sdfsdlkf
+      - SECRET_KEY=THAY-DOI-AUTH-SECRET-KEY
       - DB_NAME=auth_db
       - DB_USER=postgres
-      - DB_PASSWORD=NguyenDuc@163
+      - DB_PASSWORD=THAY-DOI-MAT-KHAU-DATABASE
       - DB_HOST=postgres
       - DB_PORT=5432
-      - JWT_SECRET_KEY=your-jwt-secret-key-here
+      - JWT_SECRET_KEY=THAY-DOI-JWT-SECRET-KEY
     depends_on:
       - postgres
     networks:
@@ -72,7 +72,7 @@ services:
     environment:
       - DB_NAME=patient_db
       - DB_USER=postgres
-      - DB_PASSWORD=NguyenDuc@163
+      - DB_PASSWORD=THAY-DOI-MAT-KHAU-DATABASE
       - DB_HOST=postgres
       - DB_PORT=5432
     depends_on:
@@ -98,7 +98,7 @@ services:
     environment:
       - DB_NAME=booking_db
       - DB_USER=postgres
-      - DB_PASSWORD=NguyenDuc@163
+      - DB_PASSWORD=THAY-DOI-MAT-KHAU-DATABASE
       - DB_HOST=postgres
       - DB_PORT=5432
     depends_on:
@@ -115,7 +115,7 @@ services:
     environment:
       - DB_NAME=pharmacy_db
       - DB_USER=postgres
-      - DB_PASSWORD=NguyenDuc@163
+      - DB_PASSWORD=THAY-DOI-MAT-KHAU-DATABASE
       - DB_HOST=postgres
       - DB_PORT=5432
     depends_on:
@@ -132,7 +132,7 @@ services:
     environment:
       - DB_NAME=clinical_db
       - DB_USER=postgres
-      - DB_PASSWORD=NguyenDuc@163
+      - DB_PASSWORD=THAY-DOI-MAT-KHAU-DATABASE
       - DB_HOST=postgres
       - DB_PORT=5432
       - GATEWAY_URL=http://gateway:8080
@@ -146,7 +146,7 @@ services:
     environment:
       - POSTGRES_DB=booking_db
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=NguyenDuc@163
+      - POSTGRES_PASSWORD=THAY-DOI-MAT-KHAU-DATABASE
       - POSTGRES_MULTIPLE_DATABASES=booking_db,auth_db,patient_db,pharmacy_db,clinical_db,payment_db
     ports:
       - "5432:5432"
